@@ -1,0 +1,14 @@
+# Compiled files
+*.pyc
+*.pyo
+
+# Directories
+.idea/
+.media/campotec/
+.static/media/uploads/
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+*.db
