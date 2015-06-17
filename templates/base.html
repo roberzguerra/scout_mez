@@ -1,0 +1,239 @@
+<!doctype html>
+<!--[if lt IE 7]> <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %} class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %} class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %} class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %} class="no-js">
+{% load pages_tags mezzanine_tags i18n future staticfiles %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="all">
+    <meta name="rating" content="general">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta name="author" content="">
+    <meta name="Publisher" content="">
+    <meta name="owner" content="">
+    <meta name="copyright" content="">
+    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+
+    {# Icons #}
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="{{ STATIC_URL }}institution/img/touch/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="{{ STATIC_URL }}institution/img/touch/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="{{ STATIC_URL }}institution/img/touch/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed"
+          href="{{ STATIC_URL }}institution/img/touch/apple-touch-icon-57x57-precomposed.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}institution/img/favicon.ico">
+    <link rel="dns-prefetch" href="//ajax.googleapis.com">
+    <meta name="msapplication-TileImage"
+          content="{{ STATIC_URL }}institution/img/touch/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#222222">
+    {# iOS Web Apps #}
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="">
+    {# Facebook #}
+    <meta property="og:title" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta property="og:type" content="site">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="">
+    {# {% bootstrap_css %} #}
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tahoma">
+    <link rel="stylesheet" href="{{ STATIC_URL }}institution/css/index.css">
+    {% block extra_head_css %}
+
+    {% endblock extra_head_css %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}institution/js/vendor/jquery.js"><\/script>')</script>
+
+    <script src="{{ STATIC_URL }}institution/js/vendor/modernizr.js"></script>
+{% comment %}
+    {# Imports bootstrap3 #}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% if 'javascript_in_head'|bootstrap_setting %}{% bootstrap_javascript jquery=True %}{% endif %}
+    {# Fim Imports bootstrap3 #}
+{% endcomment %}
+
+    {% ifinstalled mezzanine.blog %}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url 'blog_post_feed' 'rss' %}">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url 'blog_post_feed' 'atom' %}">
+    {% endifinstalled %}
+
+    {% compress css %}
+    {% comment %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/mezzanine.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
+        {% if LANGUAGE_BIDI %}
+        <link rel="stylesheet" href="{% static 'css/rtl.css' %}">
+        {% endif %}
+        {% ifinstalled cartridge.shop %}
+        <link rel="stylesheet" href="{% static 'css/cartridge.css' %}">
+        {% if LANGUAGE_BIDI %}
+        <link rel="stylesheet" href="{% static 'css/cartridge.rtl.css' %}">
+        {% endif %}
+        {% endifinstalled %}
+    {% endcomment %}
+        {% block extra_css %}
+
+        {% endblock %}
+    {% endcompress %}
+
+    {% compress js %}
+    <script src="{% static 'mezzanine/js/'|add:settings.JQUERY_FILENAME %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/bootstrap-extras.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+    {% endcompress %}
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/html5shiv.js' %}"></script>
+    <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}body{% endblock %}">
+
+    <div id="loader-bg">
+        <div id="loader-canvas">
+            <div class="loading"></div>
+        </div>
+        <span id="loader-percent"></span>
+    </div>
+
+    <!--[if lt IE 10]>
+        <p class="browsehappy">Você está usando um navegador <strong>desatualizado</strong>. Por favor, <a href="http://browsehappy.com/">atualize seu navegador</a> para uma melhor experiência.</p>
+    <![endif]-->
+    {% include 'institution/header.html' %}
+
+    <main id="main" role="main">
+        {% nevercache %}
+            {% if messages %}
+                <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endnevercache %}
+        {% block content_main %}
+            {% block main %}
+
+            {% endblock main %}
+        {% endblock content_main %}
+    </main>
+    {% include 'institution/footer.html' %}
+
+
+<script src="{{ STATIC_URL }}institution/js/vendor/jquery.queryloader2.min.js"></script>
+<script src="/static/institution/js/vendor/plugins.min.js"></script>
+<script src="/static/institution/js/_basico.js"></script>
+{% block end_scripts %}
+    <script src="/static/institution/js/index.js"></script>
+{% endblock end_scripts %}
+
+<!--
+##############################################
+##############################################
+##############################################
+##############################################
+END -->
+
+{% comment %}
+    <br><br><br><br>
+    <hr>
+
+    <div class="container">
+
+
+
+    <h1>{% block title %}{% endblock %}</h1>
+
+    <ul class="breadcrumb">
+    {% spaceless %}
+    {% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
+    {% endspaceless %}
+    </ul>
+
+    </div>
+
+    <div class="container">
+    <div class="row">
+
+    <div class="col-md-2 left">
+        {% block left_panel %}
+        <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
+        {% endblock %}
+    </div>
+
+    <div class="col-md-7 middle">
+        {% block main %}{% endblock %}
+    </div>
+
+    <div class="col-md-3 right">
+        {% nevercache %}
+        {% include "includes/user_panel.html" %}
+        {% endnevercache %}
+        <div class="panel panel-default">
+        <div class="panel-body">
+        {% block right_panel %}
+        {% ifinstalled mezzanine.twitter %}
+        {% include "twitter/tweets.html" %}
+        {% endifinstalled %}
+        {% endblock %}
+        </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+
+    <footer>
+    <div class="container">
+    {% page_menu "pages/menus/footer.html" %}
+
+    <div class="row">
+    <p class="site-info text-center">
+        {% trans "Powered by" %}
+        <a href="http://mezzanine.jupo.org">Mezzanine</a>{% ifinstalled cartridge.shop %},
+        <a href="http://cartridge.jupo.org">Cartridge</a>{% endifinstalled %}
+        {% trans "and" %}
+        <a href="http://www.djangoproject.com">Django</a>
+        <span class="separator">|</span>
+        {% trans "Theme by" %} <a target="_blank" href="http://getbootstrap.com">Bootstrap</a>
+        {% ifinstalled mezzanine.mobile %}
+        <span class="separator">|</span>
+        <a href="{% url 'set_device' 'mobile' %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
+        {% endifinstalled %}
+    </p>
+    </div>
+    </div>
+    </footer>
+{% endcomment %}
+
+{% include "includes/footer_scripts.html" %}
+
+<!-- FIM BODY !-->
+</body>
+</html>
