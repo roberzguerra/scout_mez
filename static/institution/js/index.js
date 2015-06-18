@@ -60,7 +60,7 @@
     };
 
     index.slider();
-    index.news();
+    //index.news();
 
     if ($(window).width() > 750) {
         index.resetProducts();

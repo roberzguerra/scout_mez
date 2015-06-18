@@ -1185,9 +1185,10 @@ header {
     font-size: 0.9375em;
 }
 
-.menu a.active, .menu a:hover {
+.menu a.active, .menu li.active a, .menu a:hover {
     color: #AEBE18;
 }
+
 
 .menu.open .main-menu {
     max-height: 166px;

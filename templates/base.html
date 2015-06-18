@@ -110,7 +110,7 @@
     {% block extra_head %}{% endblock %}
 </head>
 
-<body id="{% block body_id %}body{% endblock %}">
+<body id="{% block body_id %}body{% endblock %}" class="{% block body_class %}{% endblock body_class %}">
 
     <div id="loader-bg">
         <div id="loader-canvas">
@@ -124,7 +124,7 @@
     <![endif]-->
     {% include 'institution/header.html' %}
 
-    <main id="main" role="main">
+    <main id="main" role="main" class="{% block main_class %}{% endblock main_class %}">
         {% nevercache %}
             {% if messages %}
                 <div class="messages">
@@ -149,8 +149,9 @@
 <script src="{{ STATIC_URL }}institution/js/vendor/jquery.queryloader2.min.js"></script>
 <script src="/static/institution/js/vendor/plugins.min.js"></script>
 <script src="/static/institution/js/_basico.js"></script>
+<script src="/static/institution/js/index.js"></script>
 {% block end_scripts %}
-    <script src="/static/institution/js/index.js"></script>
+
 {% endblock end_scripts %}
 
 <!--

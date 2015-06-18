@@ -25,8 +25,12 @@
                     {% endif %}
                     {% if page.has_children %}{% page_menu page %}{% endif %}
                 {% endif %}
-
             {% endfor %}
+
+            {# IF PARA CRIAR A MIGALHA DA NOTICIA #}
+            {% if blog_posts.object_list or blog_post %}
+                <li id="breadcrumb-menu-{{ page.html_id }}" class="selected">Notícias</li>
+            {% endif %}
         {% endif %}
     </ul>
 
@@ -63,16 +67,6 @@
         </li>
     </ul>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 {% comment %}
     {% if on_home %}
