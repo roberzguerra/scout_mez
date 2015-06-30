@@ -12,27 +12,151 @@
 {{ blog_post.description }}
 {% endmetablock %}{% endblock %}
 
-{% block title %}
-{% editable blog_post.title %}{{ blog_post.title }}{% endeditable %}
-{% endblock %}
+{% block page_banner %}
+    <div class="inner-banner">
+    {% block blog_post_detail_featured_image %}
+        {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+            <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 1920 300 %}">
+        {% else %}
+            <img src="http://placehold.it/1920x300" alt="Banner">
+        {% endif %}
+    {% endblock %}
+    </div>
+{% endblock page_banner %}
 
 {% block breadcrumb_menu %}
-{{ block.super }}
-<li class="active">{{ blog_post.title }}</li>
+    {{ block.super }}
+    <li class="selected">{{ blog_post.title }}</li>
 {% endblock %}
 
 {% block main %}
 
+    {% block title %}
+        {% editable blog_post.title %}<h2>{{ blog_post.title }} <span class="titles-bgs"></span></h2>{% endeditable %}
+    {% endblock %}
+
+    {# CONTEUDO ########################################################### #}
+
+        <div class="notice">
+            {% if blog_post.description and blog_post.description != blog_post.title %}
+                <strong>{{ blog_post.description }}</strong>
+            {% endif %}
+{#            <p class="date">{% blocktrans with sometime=blog_post.publish_date|date:'d/m/Y \à\s H:i ' %}Publicado em {{ sometime }}{% endblocktrans %}</p>#}
+            <p class="date">{% blocktrans with sometime=blog_post.publish_date_post %}{{ sometime }}{% endblocktrans %}</p>
+            <div class="text">
+                {% block blog_post_detail_content %}
+                    {% editable blog_post.content %}
+                        {{ blog_post.content|richtext_filters|safe }}
+                    {% endeditable %}
+                {% endblock %}
+            </div>
+        {% comment %}
+            <div class="related clearfix">
+                <div class="links">
+                    <strong>Links relacionados</strong>
+                    <ul>
+                        <li><a href="javascript:void(0);">Lorem ipsum dolor.</a></li>
+                        <li><a href="javascript:void(0);">Lorem ipsum dolor.</a></li>
+                        <li><a href="javascript:void(0);">Lorem ipsum dolor.</a></li>
+                    </ul>
+                </div>
+                <div class="files">
+                    <strong>Arquivos relacionados</strong>
+                    <a href="javascript:void(0);">Lorem ipsum dolor.</a>
+                    <a href="javascript:void(0);">Lorem ipsum dolor.</a>
+                    <a href="javascript:void(0);">Lorem ipsum dolor.</a>
+                </div>
+            </div>
+        {% endcomment %}
+
+        {% block blog_post_previous_next %}
+            <div class="other-news">
+                <ul class="list-news clearfix">
+                {% with blog_post.get_previous_by_publish_date as previous %}
+                {% if previous %}
+                    <li>
+                        <a href="{{ previous.get_absolute_url }}" class="back-list btn-style"><span>{{ previous }}</span><i class="btn"></i></a>
+                    </li>
+                {% endif %}
+                {% endwith %}
+                {% with blog_post.get_next_by_publish_date as next %}
+                {% if next %}
+                    <li class="last">
+                        <a href="{{ next.get_absolute_url }}" class="back-list btn-style last"><span>{{ next }}</span><i class="arrow btn"></i></a>
+                    </li>
+                {% endif %}
+                {% endwith %}
+                </ul>
+            </div>
+        {% endblock %}
+
+        </div>
+        <div class="comments">
+            <strong>Comentários</strong>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'matheusazzi',
+                disqus_url = 'http://www.matheusazzi.com/blog/criando-aplicacoes-com-node/';
+
+                (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+        </div>
+        <div class="other-news">
+            <strong>Notícias relacionadas</strong>
+            <ul class="list-news clearfix">
+                <li>
+                    <a href="javascript:void(0);">
+                        <img src="http://placehold.it/460x260" alt="Notícias">
+                    </a>
+                    <div class="text">
+                        <div class="aux">
+                            <span>02/10/2014</span>
+                            <p>
+                                Últimos avisos sobre o Congresso Escoteiro Regional
+                            </p>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0);" class="detail btn-style"><span>Ver datalhe da notícia</span><i class="arrow btn"></i></a>
+                </li>
+                <li class="last">
+                    <a href="javascript:void(0);">
+                        <img src="http://placehold.it/460x260" alt="Notícias">
+                    </a>
+                    <div class="text">
+                        <div class="aux">
+                            <span>05/10/2014</span>
+                            <p>
+                                Lorem ipsum dolor sit amet.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0);" class="detail btn-style"><span>Ver datalhe da notícia</span><i class="arrow btn"></i></a>
+                </li>
+            </ul>
+        </div>
+
+    {% comment %}
+        <a href="noticias.html" class="back-list btn-style"><span>Voltar para a lista de notícias</span><i class="btn"></i></a>
+    {% endcomment %}
+    {# FIM CONTEUDO ####################################################### #}
+
+
+
+
 {% block blog_post_detail_postedby %}
-{% editable blog_post.publish_date %}
-<h6 class="post-meta">
-    {% trans "Posted by" %}:
-    {% with blog_post.user as author %}
-    <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
-    {% endwith %}
-    {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
-</h6>
-{% endeditable %}
+    {% editable blog_post.publish_date %}
+    <h6 class="post-meta">
+        {% trans "Posted by" %}:
+        {% with blog_post.user as author %}
+        <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+        {% endwith %}
+        {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
+    </h6>
+    {% endeditable %}
 {% endblock %}
 {% block blog_post_detail_commentlink %}
 <p>
@@ -50,21 +174,17 @@
 </p>
 {% endblock %}
 
-{% block blog_post_detail_featured_image %}
-{% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
-<p><img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 600 0 %}"></p>
-{% endif %}
-{% endblock %}
-
 {% if settings.COMMENTS_DISQUS_SHORTNAME %}
 {% include "generic/includes/disqus_counts.html" %}
 {% endif %}
 
-{% block blog_post_detail_content %}
-{% editable blog_post.content %}
-{{ blog_post.content|richtext_filters|safe }}
-{% endeditable %}
-{% endblock %}
+{% comment %}
+    {% block blog_post_detail_content %}
+    {% editable blog_post.content %}
+    {{ blog_post.content|richtext_filters|safe }}
+    {% endeditable %}
+    {% endblock %}
+{% endcomment %}
 
 {% block blog_post_detail_keywords %}
 {% keywords_for blog_post as tags %}
@@ -94,24 +214,26 @@
 <a class="btn btn-sm share-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">{% trans "Share on Facebook" %}</a>
 {% endblock %}
 
-{% block blog_post_previous_next %}
-<ul class="pager">
-{% with blog_post.get_previous_by_publish_date as previous %}
-{% if previous %}
-<li class="previous">
-    <a href="{{ previous.get_absolute_url }}">&larr; {{ previous }}</a>
-</li>
-{% endif %}
-{% endwith %}
-{% with blog_post.get_next_by_publish_date as next %}
-{% if next %}
-<li class="next">
-    <a href="{{ next.get_absolute_url }}">{{ next }} &rarr;</a>
-</li>
-{% endif %}
-{% endwith %}
-</ul>
-{% endblock %}
+{% comment %}
+    {% block blog_post_previous_next %}
+        <ul class="pager">
+        {% with blog_post.get_previous_by_publish_date as previous %}
+        {% if previous %}
+        <li class="previous">
+            <a href="{{ previous.get_absolute_url }}">&larr; {{ previous }}</a>
+        </li>
+        {% endif %}
+        {% endwith %}
+        {% with blog_post.get_next_by_publish_date as next %}
+        {% if next %}
+        <li class="next">
+            <a href="{{ next.get_absolute_url }}">{{ next }} &rarr;</a>
+        </li>
+        {% endif %}
+        {% endwith %}
+        </ul>
+    {% endblock %}
+{% endcomment %}
 
 {% block blog_post_detail_related_posts %}
 {% if blog_post.related_posts.all %}

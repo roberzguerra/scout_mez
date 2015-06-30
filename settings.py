@@ -74,7 +74,7 @@ PAGE_MENU_TEMPLATES = (
 
 # Setting to turn on featured images for blog posts. Defaults to False.
 #
-# BLOG_USE_FEATURED_IMAGE = True
+BLOG_USE_FEATURED_IMAGE = True
 
 # If True, the south application will be automatically added to the
 # INSTALLED_APPS setting.
@@ -108,6 +108,7 @@ TIME_ZONE = "America/Sao_Paulo"
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
+#DATETIME_FORMAT = 'd/m/y H:M:S'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html

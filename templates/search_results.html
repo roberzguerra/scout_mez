@@ -1,4 +1,5 @@
-{% extends "base.html" %}
+{#{% extends "base.html" %}#}
+{% extends "pages/page.html" %}
 
 {% load i18n future mezzanine_tags %}
 
@@ -8,12 +9,17 @@
 <meta name="robots" content="noindex">
 {% endblock %}
 
-{% block breadcrumb_menu %}
-<li>
-    <a href="{% url "home" %}">{% trans "Home" %}</a>
-</li>
-<li class="active">{% trans "Search Results" %}</li>
-{% endblock %}
+
+{% comment %}
+    {% block breadcrumb_menu %}
+    <li>
+        <a href="{% url "home" %}">{% trans "Home" %}</a>
+    </li>
+    <li class="active">{% trans "Search Results" %}</li>
+    {% endblock %}
+{% endcomment %}
+{% block page_banner %}
+{% endblock page_banner %}
 
 {% block main %}
 

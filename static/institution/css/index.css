@@ -2727,8 +2727,8 @@ footer a.phone span {
 }
 
 .fundation .logos {
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    /*padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);*/
 }
 
 .fundation .brand {
@@ -2976,7 +2976,7 @@ footer a.phone span {
 }
 
 .fundation {
-    margin: 20px auto 0;
+    margin: 0 auto 0;
     width: 100%;
 }
 
@@ -2991,8 +2991,8 @@ footer a.phone span {
 }
 
 .fundation .logos {
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    /*padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);*/
 }
 
 .fundation .brand {
