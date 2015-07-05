@@ -95,7 +95,13 @@
 
             <li class="{% cycle '' 'last' %}">
                 <a href="{{ blog_post.get_absolute_url }}">
-                    <img src="http://placehold.it/460x260" alt="Notícias">
+                    {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+                        <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 460 260 %}">
+                    {% else %}
+                        <img class="img-responsive" src="http://placehold.it/460x260" alt="Notícias">
+                    {% endif %}
+
+                {# <img class="img-responsive" src="http://placehold.it/460x260" alt="Notícias"> #}
                 </a>
                 <div class="text">
                     <div class="aux post-meta">
@@ -105,7 +111,7 @@
                         </p>
                     </div>
                 </div>
-                <a href="noticias-detalhe-escoteiros.html" class="detail btn-style"><span>Ver detalhe da notícia</span><i class="arrow btn"></i></a>
+                <a href="{{ blog_post.get_absolute_url }}" class="detail btn-style"><span>Ver detalhe da notícia</span><i class="arrow btn"></i></a>
             </li>
 
     {% comment %}

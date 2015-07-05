@@ -18,7 +18,7 @@
         {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
             <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 1920 300 %}">
         {% else %}
-            <img src="http://placehold.it/1920x300" alt="Banner">
+            <img class="img-responsive" src="http://placehold.it/1920x300" alt="Banner">
         {% endif %}
     {% endblock %}
     </div>
@@ -38,11 +38,19 @@
     {# CONTEUDO ########################################################### #}
 
         <div class="notice">
+
             {% if blog_post.description and blog_post.description != blog_post.title %}
                 <strong>{{ blog_post.description }}</strong>
             {% endif %}
 {#            <p class="date">{% blocktrans with sometime=blog_post.publish_date|date:'d/m/Y \à\s H:i ' %}Publicado em {{ sometime }}{% endblocktrans %}</p>#}
-            <p class="date">{% blocktrans with sometime=blog_post.publish_date_post %}{{ sometime }}{% endblocktrans %}</p>
+            <p class="date">
+                {% blocktrans with sometime=blog_post.publish_date_post %}{{ sometime }}{% endblocktrans %}<br>
+            {% trans "por" %}
+                {% with blog_post.user as author %}
+                <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+            {% endwith %}
+            </p>
+
             <div class="text">
                 {% block blog_post_detail_content %}
                     {% editable blog_post.content %}
@@ -50,6 +58,8 @@
                     {% endeditable %}
                 {% endblock %}
             </div>
+
+
         {% comment %}
             <div class="related clearfix">
                 <div class="links">
@@ -94,7 +104,10 @@
         <div class="comments">
             <strong>Comentários</strong>
             <div id="disqus_thread"></div>
-            <script type="text/javascript">
+            {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+            {% include "generic/includes/disqus_counts.html" %}
+            {% endif %}
+            {% comment %}<script type="text/javascript">
                 var disqus_shortname = 'matheusazzi',
                 disqus_url = 'http://www.matheusazzi.com/blog/criando-aplicacoes-com-node/';
 
@@ -104,6 +117,7 @@
                   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                 })();
             </script>
+            {% endcomment %}
         </div>
         <div class="other-news">
             <strong>Notícias relacionadas</strong>
@@ -146,39 +160,41 @@
 
 
 
-
-{% block blog_post_detail_postedby %}
-    {% editable blog_post.publish_date %}
-    <h6 class="post-meta">
-        {% trans "Posted by" %}:
-        {% with blog_post.user as author %}
-        <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
-        {% endwith %}
-        {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
-    </h6>
-    {% endeditable %}
-{% endblock %}
-{% block blog_post_detail_commentlink %}
-<p>
-    {% if blog_post.allow_comments %}
-        {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-            (<a href="{{ blog_post.get_absolute_url }}#disqus_thread"
-                data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
-                {% trans "Comments" %}
-            {% endspaceless %}</a>)
-        {% else %}(<a href="#comments">{% spaceless %}
-            {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
-            {% endspaceless %}</a>)
+{% comment %}
+    {% block blog_post_detail_postedby %}
+        {% editable blog_post.publish_date %}
+        <h6 class="post-meta">
+            {% trans "Posted by" %}:
+            {% with blog_post.user as author %}
+            <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+            {% endwith %}
+            {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
+        </h6>
+        {% endeditable %}
+    {% endblock %}
+    {% block blog_post_detail_commentlink %}
+    <p>
+        {% if blog_post.allow_comments %}
+            {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+                (<a href="{{ blog_post.get_absolute_url }}#disqus_thread"
+                    data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
+                    {% trans "Comments" %}
+                {% endspaceless %}</a>)
+            {% else %}(<a href="#comments">{% spaceless %}
+                {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
+                {% endspaceless %}</a>)
+            {% endif %}
         {% endif %}
-    {% endif %}
-</p>
-{% endblock %}
+    </p>
+    {% endblock %}
+{% endcomment %}
 
-{% if settings.COMMENTS_DISQUS_SHORTNAME %}
-{% include "generic/includes/disqus_counts.html" %}
-{% endif %}
 
 {% comment %}
+    {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+    {% include "generic/includes/disqus_counts.html" %}
+    {% endif %}
+
     {% block blog_post_detail_content %}
     {% editable blog_post.content %}
     {{ blog_post.content|richtext_filters|safe }}
@@ -187,31 +203,34 @@
 {% endcomment %}
 
 {% block blog_post_detail_keywords %}
-{% keywords_for blog_post as tags %}
-{% if tags %}
-{% spaceless %}
-<ul class="list-inline tags">
-    <li>{% trans "Tags" %}:</li>
-    {% for tag in tags %}
-    <li><a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a></li>
-    {% endfor %}
-</ul>
-{% endspaceless %}
-{% endif %}
+    {% keywords_for blog_post as tags %}
+    {% if tags %}
+
+    {% spaceless %}
+    <ul class="list-inline tags">
+        <li>{% trans "Tags" %}:</li>
+        {% for tag in tags %}
+        <li><a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endspaceless %}
+    {% endif %}
 {% endblock %}
 
-{% block blog_post_detail_rating %}
-<div class="panel panel-default rating">
-    <div class="panel-body">
-    {% rating_for blog_post %}
-    </div>
-</div>
-{% endblock %}
+{% comment %}
+    {% block blog_post_detail_rating %}
+        <div class="panel panel-default rating">
+            <div class="panel-body">
+            {% rating_for blog_post %}
+            </div>
+        </div>
+    {% endblock %}
+{% endcomment %}
 
 {% block blog_post_detail_sharebuttons %}
-{% set_short_url_for blog_post %}
-<a class="btn btn-sm share-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">{% trans "Share on Twitter" %}</a>
-<a class="btn btn-sm share-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">{% trans "Share on Facebook" %}</a>
+    {% set_short_url_for blog_post %}
+    <a class="btn btn-sm share-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">{% trans "Share on Twitter" %}</a>
+    <a class="btn btn-sm share-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">{% trans "Share on Facebook" %}</a>
 {% endblock %}
 
 {% comment %}
