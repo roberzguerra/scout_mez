@@ -3500,3 +3500,12 @@ footer a.phone span {
 .equipe-homepage .equipe-photo {
     width: 140px;
 }
+.titles-bgs.buss {
+  background: url("../img/bg-titles.png") no-repeat 0 0 transparent;
+  display: block;
+  width: 37px;
+  height: 37px;
+  background-position: 1px -1180px;
+  float: left;
+  margin: 0 4px 0 0;
+}

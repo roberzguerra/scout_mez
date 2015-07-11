@@ -1187,12 +1187,12 @@ header {
   line-height: 18px;
   font-size: 0.9375em;
 }
-
+/*
 .menu a:hover,
 .menu a:focus,
 .menu a.selected {
   color: #00ACCD;
-}
+}*/
 
 .menu.open .main-menu {
   max-height: 166px;
@@ -2926,5 +2926,26 @@ footer a.phone span {
   #main .list-news .detail:hover i {
     left: 70%;
   }
+}
+
+#main .related.tags {
+  padding: 1em;
+}
+#main .related.tags .links {
+    width: auto;
+    border: 0;
+}
+#main .related.tags .links ul li {
+    float: left;
+    padding: 0 1em 0 0;
+    width: auto;
+    list-style: none;
+}
+#main .related.tags a {
+    line-height: 35px;
+}
+
+#main .related a.link:hover {
+    color: #00ACCD;
 }
 /* FIM PAGINA DETALHE NOTICIA ############################### */

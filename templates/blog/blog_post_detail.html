@@ -60,6 +60,26 @@
             </div>
 
 
+
+{% block blog_post_detail_keywords %}
+    {% keywords_for blog_post as tags %}
+    {% if tags %}
+
+    {% spaceless %}
+        <div class="related clearfix tags">
+            <div class="links">
+                <strong>{% trans "Tags" %}</strong>
+                <ul>
+                {% for tag in tags %}
+                    <li><a class="link" href="{% url "blog_post_list_tag" tag.slug %}"><span class="titles-bgs buss"></span> {{ tag }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endspaceless %}
+    {% endif %}
+{% endblock %}
+
         {% comment %}
             <div class="related clearfix">
                 <div class="links">
@@ -119,39 +139,40 @@
             </script>
             {% endcomment %}
         </div>
+
+
+
+
+
+{% block blog_post_detail_related_posts %}
+    {% if blog_post.related_posts.all %}
         <div class="other-news">
-            <strong>Notícias relacionadas</strong>
+            <strong>{% trans "Notícias Relacionadas" %}</strong>
             <ul class="list-news clearfix">
-                <li>
-                    <a href="javascript:void(0);">
-                        <img src="http://placehold.it/460x260" alt="Notícias">
+            {% for post in blog_post.related_posts.all %}
+                <li class="{% cycle '' 'last' %}">
+                    <a href="{{ post.get_absolute_url }}">
+                        {% if settings.BLOG_USE_FEATURED_IMAGE and post.featured_image %}
+                            <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail post.featured_image 460 260 %}">
+                        {% else %}
+                            <img class="img-responsive" src="http://placehold.it/460x260" alt="Notícias">
+                        {% endif %}
                     </a>
                     <div class="text">
-                        <div class="aux">
-                            <span>02/10/2014</span>
+                        <div class="aux post-meta">
+                            <span>{% blocktrans with sometime=post.publish_date_post_list %}{{ sometime }}{% endblocktrans %}</span>
                             <p>
-                                Últimos avisos sobre o Congresso Escoteiro Regional
+                                {{ post.title }}<br>
                             </p>
                         </div>
                     </div>
-                    <a href="javascript:void(0);" class="detail btn-style"><span>Ver datalhe da notícia</span><i class="arrow btn"></i></a>
+                    <a href="{{ post.get_absolute_url }}" class="detail btn-style"><span>Ver detalhe da notícia</span><i class="arrow btn"></i></a>
                 </li>
-                <li class="last">
-                    <a href="javascript:void(0);">
-                        <img src="http://placehold.it/460x260" alt="Notícias">
-                    </a>
-                    <div class="text">
-                        <div class="aux">
-                            <span>05/10/2014</span>
-                            <p>
-                                Lorem ipsum dolor sit amet.
-                            </p>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0);" class="detail btn-style"><span>Ver datalhe da notícia</span><i class="arrow btn"></i></a>
-                </li>
+            {% endfor %}
             </ul>
         </div>
+    {% endif %}
+{% endblock %}
 
     {% comment %}
         <a href="noticias.html" class="back-list btn-style"><span>Voltar para a lista de notícias</span><i class="btn"></i></a>
@@ -202,6 +223,7 @@
     {% endblock %}
 {% endcomment %}
 
+{% comment %}
 {% block blog_post_detail_keywords %}
     {% keywords_for blog_post as tags %}
     {% if tags %}
@@ -216,6 +238,7 @@
     {% endspaceless %}
     {% endif %}
 {% endblock %}
+{% endcomment %}
 
 {% comment %}
     {% block blog_post_detail_rating %}
@@ -254,6 +277,7 @@
     {% endblock %}
 {% endcomment %}
 
+{% comment %}
 {% block blog_post_detail_related_posts %}
 {% if blog_post.related_posts.all %}
 <div id="related-posts">
@@ -266,6 +290,7 @@
 </div>
 {% endif %}
 {% endblock %}
+{% endcomment %}
 
 {% block blog_post_detail_comments %}
 {% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
