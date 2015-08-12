@@ -14,11 +14,13 @@ from __future__ import absolute_import, unicode_literals
 
 # Controls the ordering and grouping of the admin menu.
 #
+
 ADMIN_MENU_ORDER = (
     ("Content", ("pages.Page", "blog.BlogPost", "blog.BlogCategory",
-       "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
-    ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
+       "generic.ThreadedComment", ("Biblioteca de Mídia", "fb_browse"),)),
     ("Users", ("auth.User", "auth.Group",)),
+    ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
+    ("mezzanine_people", ("people.PersonCategory", "people.Person")),
 )
 
 # A three item sequence, each containing a sequence of template tags
@@ -110,7 +112,8 @@ TIME_ZONE = "America/Sao_Paulo"
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
-#DATETIME_FORMAT = 'd/m/y H:M:S'
+DATETIME_FORMAT = 'd/m/y H:M:S'
+DATE_INPUT_FORMATS = ('%d/%m/%Y',)
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -253,7 +256,16 @@ INSTALLED_APPS = (
     "mezzanine.pages",
     "mezzanine.galleries",
     "mezzanine.twitter",
+
+    # Adicionados
+    "scout_core",
+    "bootstrap3",
+    "mezzanine_people",
+
+    # Criados
     "institutional",
+    "events",
+
     #"mezzanine.accounts",
     #"mezzanine.mobile",
 )
@@ -302,6 +314,7 @@ MIDDLEWARE_CLASSES = (
 PACKAGE_NAME_FILEBROWSER = "filebrowser_safe"
 PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
 
+
 #########################
 # OPTIONAL APPLICATIONS #
 #########################
@@ -314,6 +327,15 @@ OPTIONAL_APPS = (
     PACKAGE_NAME_FILEBROWSER,
     PACKAGE_NAME_GRAPPELLI,
 )
+
+# GRAPPELLI SETTINGS ###
+GRAPPELLI_ADMIN_TITLE = u"Escoteiros RS"
+# END GRAPPELLI SETTINGS ##############
+
+# RICHTEXT SETTINGS ###
+RICHTEXT_FILTER_LEVEL = 3
+TINYMCE_SETUP_JS = 'core/js/tinymce_setup.js'
+# END RICHTEXT SETTINGS ##############
 
 # FILEBROWSER SETTINGS ###
 FILEBROWSER_NORMALIZE_FILENAME = True
@@ -329,6 +351,10 @@ FILEBROWSER_VERSIONS = {
     'medium': {'verbose_name': 'Medium (4col )', 'width': 460, 'height': 260, 'opts': 'crop'},
 }
 # END FILEBROWSER SETTINGS ###
+
+# MEZANINE PEOPLE SETTINGS ########
+PEOPLE_PER_PAGE = 5
+#END MEZANINE PEOPLE SETTINGS ####################
 
 ###################
 # DEPLOY SETTINGS #
@@ -384,3 +410,15 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+
+# try:
+#     from mezzanine.conf import register_setting
+#
+#     register_setting(
+#         name="RICHTEXT_ALLOWED_ATTRIBUTES",
+#         append=True,
+#         default=("style",),
+#     )
+# except ImportError:
+#     pass

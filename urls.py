@@ -33,6 +33,13 @@ urlpatterns += patterns('',
 
     url("^$", direct_to_template, {"template": "index.html"}, name="home"),
 
+    # Urls do Mezzanine People
+    #url(r'^people/', include('mezzanine_people.urls')),
+    url("^equipes/cat/(?P<category>.*)/$", "mezzanine_people.views.person_list", name="person_list_category"),
+    url("^equipes/p/(?P<slug>[-\w]+)/$", "mezzanine_people.views.person_detail", name="person_detail"),
+    url("^equipes/$", "mezzanine_people.views.person_list", name="person_list"),
+    url("^eventos/", include("events.urls", namespace='events')),
+
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
     # This pattern gives us a normal ``Page`` object, so that your

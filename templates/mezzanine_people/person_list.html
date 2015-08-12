@@ -1,0 +1,83 @@
+{% extends "pages/page.html" %}
+{% load mezzanine_tags keyword_tags i18n %}
+
+{% block meta_title %}{% if page %}{{ page.richtextpage.meta_title }}{% else %}{% trans "Equipes" %}{% endif %}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}{% if not forloop.first %}, {% endif %}{{ keyword }}{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% if page %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% else %}
+{% trans "People" %}
+{% endif %}
+{% endblock %}
+
+{% block breadcrumb_menu %}
+    {{ block.super }}
+    {% comment %}
+        <li id="breadcrumb-menu-{{ page.html_id }}"
+            class="selected">{{ page.title }}</li>
+
+        <li id="breadcrumb-menu-{{ page.html_id }}">
+            <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+        </li>
+    {% endcomment %}
+
+    {% if category %}
+        <li id="breadcrumb-menu-equipes">
+            <a href="{% url 'person_list' %}">{% trans "Equipes" %}</a>
+        </li>
+        <li id="breadcrumb-menu-{{ category.pk }}" class="selected">{{ category }}</li>
+        {# <li>{% trans "Category:" %} {{ category }}<li>#}
+    {% else %}
+        <li id="breadcrumb-menu-equipes" class="selected">
+            <a href="{% url 'person_list' %}">{% trans "Equipes" %}</a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+
+{% if category %}
+  <p>
+  {% if category %}
+    {{ category }}
+  {% else %}
+    {% trans "People" %}
+  {% endif %}
+  </p>
+{% else %}
+  {% if page %}
+  {% editable page.richtextpage.content %}
+  {{ page.richtextpage.content|safe }}
+  {% endeditable %}
+  {% endif %}
+{% endif %}
+
+{% for person in people %}
+{% editable person.first_name person.last_name person.job_title person.bio %}
+<div>
+  <img src="{{ MEDIA_URL }}{% thumbnail person.mugshot 100 0 %}" />
+  <h3><a href="{{ person.get_absolute_url }}">{{ person.full_name }}</a></h3>
+  <h4>{{ person.job_title }}</h4>
+  <ul>
+  {% for link in person.personlink_set.all %}
+    <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+  {% endfor %}
+  </ul>
+  <p>{{ person.bio|richtext_filter|safe }}</p>
+</div>
+{% endeditable %}
+{% endfor %}
+
+{% pagination_for people %}
+
+{% endblock %}
