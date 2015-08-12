@@ -187,7 +187,7 @@ class EventProgramation(RichText, AdminThumbMixin):
     event = models.ForeignKey(verbose_name=_(u"Evento"), to=Event, null=True, blank=True, help_text=_(u"Selecione o Evento desta Programação."))
 
     class Meta:
-        ordering = ["-name", "-date_time"]
+        ordering = ["-date_time", "-name"]
         db_table = "event_programation"
         verbose_name = _(u"Programação")
         verbose_name_plural = _(u"Programações")
@@ -195,8 +195,3 @@ class EventProgramation(RichText, AdminThumbMixin):
     def __unicode__(self):
         return "%s - %s" % (self.name, self.date_time)
 
-    def get_event_url_edit(self):
-        if self.event:
-            return self.event.get_admin_url()
-        else:
-            return ''

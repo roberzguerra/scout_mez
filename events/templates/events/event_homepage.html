@@ -134,8 +134,8 @@
                                         </div>
                                         <div class="programacao-slot">
                                             <div class="programacao-activity">{{ programation.name }}</div>
-                                            {% if programation.description %}
-                                                <p>{{ programation.description|safe }}</p>
+                                            {% if programation.content %}
+                                                <p>{{ programation.content|safe }}</p>
                                             {% else %}
                                                 <p>&nbsp;</p>
                                             {% endif %}

@@ -18,6 +18,16 @@ from events.models import Event, EventProgramation
 
 
 
+class EventProgramationInline(admin.TabularInline):
+    model = EventProgramation
+    form = EventProgramationForm
+    fieldsets = (
+        (None, {
+            "fields": [("name", "status"), "image", "date_time", "content"],
+        }),
+    )
+
+
 event_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
 event_fieldsets[0][1]["fields"].extend([
     'event_title_menu','event_description_short',
@@ -30,7 +40,6 @@ event_fieldsets[0][1]["fields"].extend([
 ])
 
 event_list_display = ["title", "status", "admin_link"]
-#event_list_display.insert(0, "admin_thumb")
 
 
 class EventAdmin(DisplayableAdmin):
@@ -41,10 +50,9 @@ class EventAdmin(DisplayableAdmin):
     fieldsets = event_fieldsets
     list_display = event_list_display
     #filter_horizontal = ("categories",)
-    # inlines = [
-    #     PersonLinkInline,
-    # ]
-
+    inlines = [
+        EventProgramationInline,
+    ]
 
 
 class EventProgramationAdmin(admin.ModelAdmin):
@@ -54,87 +62,22 @@ class EventProgramationAdmin(admin.ModelAdmin):
     form = EventProgramationForm
     fieldsets = (
         (None, {
-            "fields": ["name", "status", "image", "date_time", "content", "event" ],
+            "fields": ["name", "status", "image", "date_time", "content", "event",],
         }),
     )
-    list_display = ["name", "status", "get_event_url_edit"]
+    list_display = ["name", "status", "link_event_change"]
     list_display_links = ['name',]
+    ordering = ('date_time', 'name', 'status', 'content')
+    list_filter = (
+        ('status', admin.ChoicesFieldListFilter),
+        'event',
+    )
+
+    def link_event_change(self, obj):
+
+        return u'<a href="%s">%s</a>' % (obj.event.get_admin_url(), obj.event)
+    link_event_change.allow_tags = True
+    link_event_change.short_description = _(u"Evento")
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventProgramation, EventProgramationAdmin)
-
-
-# TODO: Antigos
-
-# class EventProgramationInline(admin.TabularInline):
-#     model = EventProgramation
-
-
-# class EventAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'event_title_short', 'short_url', 'status', 'information_active', 'local_active', 'observation_active')
-#     list_display_links = ('id', 'event_title_short', 'status',)
-#     actions = ('duplicate_item',)
-#
-#     form = EventForm
-#     # inlines = [EventProgramationInline, ]
-#
-#     def event_title_short(self, obj):
-#         """
-#         Retorna o titulo sem tags html para a exibição na listagem
-#         """
-#         return obj.__unicode__()
-#     event_title_short.allow_tags = True
-#     event_title_short.short_description = _(u"Título")
-#
-#     def duplicate_item(self, request, queryset):
-#         if queryset.count() <> 1:
-#             self.message_user(request, _(u"Selecione apenas 1 item para duplicar"), level=messages.ERROR)
-#         else:
-#             obj = queryset.get()
-#             obj_new = obj.duplicate_save()
-#             return HttpResponseRedirect(redirect_to=reverse('admin:events_event_change', args=(obj_new.id,)))
-#     duplicate_item.short_description = _(u"Duplicar Item")
-#
-#
-#     def link_url_event_preview(self, obj):
-#         """
-#         Cria link para pre-visualizar a pagina
-#         """
-#         return obj.get_link_preview()
-#
-#     link_url_event_preview.allow_tags = True
-#     link_url_event_preview.short_description = _(u"Pré-visualização")
-
-
-# class EventProgramationAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'date_time', 'status', 'description_short', 'image_thumb')
-#     # list_display_links = ('name',)
-#     search_fields = ('name', 'description')
-#     ordering = ('date_time', 'name', 'status', 'content')
-#     list_filter = (
-#         #('active', admin.ChoicesFieldListFilter),
-#         'event',
-#     )
-#     #actions = [inactivate, activate, ]
-#
-#     def description_short(self, obj):
-#         """
-#         Corta o texto da Descrição para nao ficar exibir muito grande na listagem
-#         """
-#         text = strip_tags(obj.description)
-#         if (len(text) > 80):
-#             return "%s..." % text[0:80]
-#         else:
-#             return "%s" % text
-#
-#     def image_thumb(self, obj):
-#         """
-#         Exibe miniatura da imagem na listagem
-#         """
-#         return '<img src="%s%s" style="width:50px;">' % (settings.MEDIA_URL, obj.image)
-#
-#     image_thumb.allow_tags = True
-
-
-#admin.site.register(Event, EventAdmin)
-#admin.site.register(EventProgramation, EventProgramationAdmin)
