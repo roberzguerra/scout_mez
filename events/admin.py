@@ -1,17 +1,9 @@
 # -*- coding:utf-8 -*-
 from copy import deepcopy
-from django.contrib.admin import helpers
-from django.core.checks import messages
-from django.http import HttpResponse, HttpResponseRedirect
-from django.utils.html import strip_tags
-from django.utils.safestring import mark_safe
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
-from django.core.urlresolvers import reverse
-from django.conf import settings
-#from core.models import INACTIVE
-#from core.admin import activate, inactivate
+
 from mezzanine.core.admin import DisplayableAdmin
 from events.forms import EventForm, EventProgramationForm
 from events.models import Event, EventProgramation
@@ -23,7 +15,7 @@ class EventProgramationInline(admin.TabularInline):
     form = EventProgramationForm
     fieldsets = (
         (None, {
-            "fields": [("name", "status"), "image", "date_time", "content"],
+            "fields": ["name", "status", "image", "date_time", "content"],
         }),
     )
 
