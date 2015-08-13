@@ -46,7 +46,7 @@ class EventAdmin(DisplayableAdmin):
     """
     Admin dos Eventos
     """
-    form = EventProgramationForm
+    form = EventForm
     fieldsets = event_fieldsets
     list_display = event_list_display
     #filter_horizontal = ("categories",)
