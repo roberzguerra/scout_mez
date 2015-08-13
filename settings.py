@@ -335,7 +335,7 @@ GRAPPELLI_ADMIN_TITLE = u"Escoteiros RS"
 
 # RICHTEXT SETTINGS ###
 RICHTEXT_FILTER_LEVEL = 3
-TINYMCE_SETUP_JS = 'core/js/tinymce_setup.js'
+TINYMCE_SETUP_JS = 'scout_core/js/tinymce_setup.js'
 # END RICHTEXT SETTINGS ##############
 
 # FILEBROWSER SETTINGS ###
