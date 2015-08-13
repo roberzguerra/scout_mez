@@ -17,6 +17,7 @@ class EventForm(ModelForm):
 
     class Meta:
         model = Event
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
 
@@ -44,6 +45,7 @@ class EventProgramationForm(ModelForm):
 
     class Meta:
         model = EventProgramation
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
 
