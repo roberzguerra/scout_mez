@@ -66,8 +66,11 @@ class EventProgramationAdmin(admin.ModelAdmin):
     )
 
     def link_event_change(self, obj):
+        html = u' - '
+        if obj.event:
+            html = u'<a href="%s">%s</a>' % (obj.event.get_admin_url(), obj.event)
+        return html
 
-        return u'<a href="%s">%s</a>' % (obj.event.get_admin_url(), obj.event)
     link_event_change.allow_tags = True
     link_event_change.short_description = _(u"Evento")
 
