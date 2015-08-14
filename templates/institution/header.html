@@ -1,5 +1,4 @@
 {% load pages_tags mezzanine_tags i18n future staticfiles %}
-
 <header id="header" role="banner">
     <ul class="nav-sections clearfix">
         <li class="wanna-be"><a href="javascript:void(0);">Quero ser Escoteiro<span class="blt"></span></a></li>
@@ -13,11 +12,11 @@
             <a href="" class="ir">Escoteiros do Brasil - Rio Grande do Sul</a>
         </h1>
         <button class="btn-menu"><span></span></button>
-
-
             {% page_menu "pages/menus/dropdown.html" %}
-
-        <!--
+    </nav>
+</header>
+        {% comment %}
+    <nav class="menu" role="navegation">
         <ul class="clearfix main-menu">
             <li><a href="" class="active">Escotismo</a></li>
             <li><a href="">Transparência</a></li>
@@ -33,13 +32,9 @@
             <li><a href="">Mapa do site</a></li>
             <li><a href="javascript:void(0);">Parceiros</a></li>
         </ul>
-        -->
-
-
-
     </nav>
+        {% endcomment %}
     {# {% search_form "all" %} #}
-
     {% comment %}
     <li><a href="{% url 'institution-escotismo' %}" class="active">Escotismo</a></li>
     <li><a href="{% url 'institution-transparencia' %}">Transparência</a></li>
@@ -71,4 +66,4 @@
     <li><a href="{% url 'institution-mapa-site' %}">Mapa do site</a></li>
     <li><a href="javascript:void(0);">Parceiros</a></li>
     {% endcomment %}
-</header>
+
