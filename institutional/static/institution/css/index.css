@@ -3026,6 +3026,10 @@ footer a.phone span {
     background: url("../img/maqina.png") no-repeat;
 }
 
+.tt-escotismo {
+    margin: 0 auto 2rem auto;
+}
+
 @media screen and (min-width: 47.5em) {
     footer {
         margin-top: 70px;
@@ -3112,7 +3116,6 @@ footer a.phone span {
         height: 47px;
         line-height: 47px;
         width: 216px;
-        margin: 0 auto;
     }
 
     .tt-escotismo span {
@@ -3346,11 +3349,11 @@ footer a.phone span {
 }
 
 .migalha .share .share-face {
-    width: 58px;
+    width: 220px;
 }
 
 .migalha .share .share-twitter {
-    width: 60px;
+    width: 110px;
 }
 
 .migalha .share .share-email {
@@ -3418,7 +3421,7 @@ footer a.phone span {
     }
 
     .migalha .share .share-face {
-        width: 130px;
+        width: 220px;
     }
 
     .migalha .share .share-twitter {
