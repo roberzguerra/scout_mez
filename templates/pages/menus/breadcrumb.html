@@ -2,15 +2,17 @@
 {% if on_home %}
     <li class="selected">{% trans "Home" %}</li>
 {% else %}
+
     {% for page in page_branch %}
 
-        {% if not has_home and page.is_primary and forloop.first %}
+{#        {% if not has_home and page.is_primary and forloop.first %}#}
+    {% if not has_home and page.is_primary and forloop.first %}
         <li id="breadcrumb-menu-home">
             <a href="{% url "home" %}">{% trans "Home" %}</a>
         </li>
         {% endif %}
-
-        {% if page.is_current_or_ascendant %}
+        {# page.is_current_parent RESOLVE TEMPORARIAMENTE #}
+        {% if page.is_current_or_ascendant or page.is_current_parent %}
             {% if page.is_current %}
             <li id="breadcrumb-menu-{{ page.html_id }}"
                 class="selected">{{ page.title }}</li>
@@ -32,6 +34,10 @@
         <li id="breadcrumb-menu-{{ page.html_id }}" class="selected">{% trans "Notícias" %}</li>
     {% endif %}
 {% endif %}
+
+
+
+
 
 {% comment %}
     {% if on_home %}

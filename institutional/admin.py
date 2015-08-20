@@ -1,8 +1,27 @@
 # -*- coding:utf-8 -*-
 
 from django.contrib import admin
-from mezzanine.blog.admin import BlogCategoryAdmin
-from mezzanine.blog.models import BlogCategory
-from mezzanine.pages.models import Page
-from mezzanine.conf import settings
 
+from mezzanine.conf import settings
+from mezzanine.pages.admin import PageAdmin
+
+from models import Team
+
+class TeamAdmin(PageAdmin):
+    """
+    Admin para a Pagina de Equipes
+    """
+
+    #fieldsets = ((None, {"fields": ("title",)}),)
+
+    # def in_menu(self):
+    #     """
+    #     Hide from the admin menu unless explicitly set in ``ADMIN_MENU_ORDER``.
+    #     """
+    #     for (name, items) in settings.ADMIN_MENU_ORDER:
+    #         if "people.PersonCategory" in items:
+    #             return True
+    #     return False
+
+
+admin.site.register(Team, TeamAdmin)

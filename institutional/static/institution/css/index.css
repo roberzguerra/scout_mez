@@ -3115,17 +3115,22 @@ footer a.phone span {
         position: relative;
         height: 47px;
         line-height: 47px;
-        width: 216px;
+        width: 50rem;
+        text-align: center;
     }
 
-    .tt-escotismo span {
-        display: block;
+    .tt-escotismo .book {
+            display: block;
         width: 51px;
         height: 47px;
-        position: absolute;
-        right: 0;
-        top: 0;
+        /* position: absolute; */
+        /* right: 0; */
+        /* top: 0; */
         background-position: 0 -1009px;
+        text-align: center;
+        /* text-align: center; */
+        margin: auto auto;
+        display: inline-block;
     }
 
     .description {

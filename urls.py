@@ -77,6 +77,7 @@ urlpatterns += patterns('',
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
     ("^", include("mezzanine.urls")),
+    ("^institucional/", include("institutional.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------

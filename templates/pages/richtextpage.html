@@ -4,7 +4,7 @@
 
 {% block main %}{{ block.super }}
     <strong class="tt-escotismo">
-        {{ page.title }} <span class="titles-bgs ir">page.title</span>
+        {{ page.title }} <i class="titles-bgs book"></i>
     </strong>
     {% editable page.richtextpage.content %}
         {{ page.richtextpage.content|richtext_filters|safe }}

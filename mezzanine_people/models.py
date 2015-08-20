@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from mezzanine.conf import settings
 from mezzanine.core.fields import RichTextField, FileField
 from mezzanine.core.models import Displayable, RichText, Slugged
+from mezzanine.pages.models import Page
 from mezzanine.utils.models import AdminThumbMixin
 
 
@@ -14,21 +15,18 @@ class Person(Displayable, RichText, AdminThumbMixin):
     A person.
     """
 
-    categories = models.ManyToManyField("PersonCategory",
-                                        verbose_name=_("Categories"),
-                                        blank=True, related_name="people")
-    first_name = models.CharField(_("first name"), blank=True, max_length=100)
-    last_name = models.CharField(_("last name"), blank=True, max_length=100)
-    mugshot = FileField(verbose_name=_("Profile photo"),
-                        upload_to="people", format="Image",
-                        max_length=255, null=True, blank=True)
-    mugshot_credit = models.CharField(_("Profile photo credit"), blank=True, max_length=200)
-    email = models.EmailField(_("e-mail address"), blank=True)
-    bio = RichTextField(_("biography"),
-                          help_text=_("This field can contain HTML and should contain a few paragraphs describing the background of the person."),
-                          default="", blank=True)
-    job_title = models.CharField(_("job title"), max_length=60, blank=True, help_text=_("Example: First Grade Teacher"))
-    order = models.PositiveSmallIntegerField(default=0)
+    categories = models.ManyToManyField("PersonCategory", verbose_name=_(u"Equipes"), blank=True,
+        related_name="people")
+    first_name = models.CharField(_(u"Primeiro Nome"), blank=True, max_length=100)
+    last_name = models.CharField(_(u"Último Nome"), blank=True, max_length=100)
+    mugshot = FileField(verbose_name=_(u"Imagem de Perfil"), upload_to="people", format="Image", max_length=255,
+        null=True, blank=True)
+    mugshot_credit = models.CharField(_(u"Imagem de Perfil (credit)"), blank=True, max_length=200)
+    email = models.EmailField(_(u"E-mail"), blank=True)
+    bio = RichTextField(_(u"Biografia"), help_text=_(u"Breve biografia da pessoa e/ou cargo."), default="", blank=True)
+    job_title = models.CharField(_(u"Título do Cargo"), max_length=60, blank=True, help_text=_(u"Exemplo: Diretor Presidente"))
+    order = models.PositiveSmallIntegerField(verbose_name=_(u"Ordem"), default=0)
+
     admin_thumb_field = "mugshot"
     search_fields = {"first_name", "last_name", "bio", "job_title",}
 
@@ -49,8 +47,8 @@ class PersonLink(models.Model):
     """
     A link to a person's interesting URLs, such as Twitter or Facebook
     """
-    name = models.CharField(_("link name"), max_length=50, help_text=_("Friendly name of the link. E.g. Twitter"))
-    url = models.URLField(_("URL"))
+    name = models.CharField(_(u"Nome do Link"), max_length=50, help_text=_(u"Nome do link, ex: Twitter, Facebook..."))
+    url = models.URLField(_(u"URL"))
     person = models.ForeignKey(Person)
 
     class Meta:
@@ -64,7 +62,6 @@ class PersonCategory(Slugged):
     """
 
     class Meta:
-
         verbose_name = _(u"Equipe")
         verbose_name_plural = _(u"Equipes")
 

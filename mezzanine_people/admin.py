@@ -20,6 +20,7 @@ person_list_display.insert(0, "admin_thumb")
 class PersonLinkInline(admin.TabularInline):
     model = PersonLink
 
+
 class PersonAdmin(DisplayableAdmin):
     """
     Admin class for people.
@@ -31,6 +32,7 @@ class PersonAdmin(DisplayableAdmin):
     inlines = [
         PersonLinkInline,
     ]
+
 
 class PersonCategoryAdmin(admin.ModelAdmin):
     """
