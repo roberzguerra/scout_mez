@@ -6,4 +6,4 @@ from django.apps import AppConfig
 
 class MezzaninePeopleConfig(AppConfig):
     name = 'mezzanine_people'
-    verbose_name = "Equipes"
+    verbose_name = _(u"Equipes")

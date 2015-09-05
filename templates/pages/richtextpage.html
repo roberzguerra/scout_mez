@@ -3,11 +3,9 @@
 {% load mezzanine_tags %}
 
 {% block main %}{{ block.super }}
-    <strong class="tt-escotismo">
-        {{ page.title }} <i class="titles-bgs book"></i>
-    </strong>
-    {% editable page.richtextpage.content %}
-        {{ page.richtextpage.content|richtext_filters|safe }}
-    {% endeditable %}
+
+{% editable page.richtextpage.content %}
+{{ page.richtextpage.content|richtext_filters|safe }}
+{% endeditable %}
 
 {% endblock %}

@@ -5,6 +5,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
+from mezzanine.conf import settings
 
 
 admin.autodiscover()
@@ -19,8 +20,12 @@ urlpatterns = i18n_patterns("",
     ("^admin/", include(admin.site.urls)),
 )
 
-urlpatterns += patterns('',
+if settings.USE_MODELTRANSLATION:
+    urlpatterns += patterns('',
+        url('^i18n/$', 'django.views.i18n.set_language', name='set_language'),
+    )
 
+urlpatterns += patterns('',
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
 
@@ -32,13 +37,6 @@ urlpatterns += patterns('',
     # one out.
 
     url("^$", direct_to_template, {"template": "index.html"}, name="home"),
-
-    # Urls do Mezzanine People
-    #url(r'^people/', include('mezzanine_people.urls')),
-    url("^equipes/cat/(?P<category>.*)/$", "mezzanine_people.views.person_list", name="person_list_category"),
-    url("^equipes/p/(?P<slug>[-\w]+)/$", "mezzanine_people.views.person_detail", name="person_detail"),
-    url("^equipes/$", "mezzanine_people.views.person_list", name="person_list"),
-    url("^eventos/", include("events.urls", namespace='events')),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
@@ -76,8 +74,8 @@ urlpatterns += patterns('',
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    ("^", include("mezzanine.urls")),
-    ("^institucional/", include("institutional.urls")),
+    url("^", include("mezzanine.urls")),
+    url("^institucional/", include("institutional.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------

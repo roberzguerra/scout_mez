@@ -1,19 +1,7 @@
-# Compiled files
 *.pyc
 *.pyo
 *.db
 .DS_Store
 .coverage
 local_settings.py
-/static/media
-
-# Directories
-.idea/
-.media/campotec/
-.static/media/uploads/
-
-# Logs and databases
-*.log
-*.sqlite
-*.sqlite3
-*.db
+/static
