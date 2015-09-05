@@ -3120,7 +3120,7 @@ footer a.phone span {
     }
 
     .tt-escotismo .book {
-            display: block;
+        display: block;
         width: 51px;
         height: 47px;
         /* position: absolute; */
@@ -3405,6 +3405,10 @@ footer a.phone span {
     background-color: #CCCCCC;
     border: 1px solid #B4B4B4;
     color: #fff;
+}
+
+.migalha .section .active {
+    background: none;
 }
 
 @media screen and (min-width: 53.125em) {
