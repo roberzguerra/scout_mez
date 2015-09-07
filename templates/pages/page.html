@@ -21,7 +21,13 @@
 
 {% block content_main %}
     {% spaceless %}
-        {% block page_banner %}{% page_menu "pages/page_banner.html" %}{% endblock page_banner %}
+        {% block page_banner %}
+            {% if page.image %}
+                <img src="{{ MEDIA_URL }}{% thumbnail page.image 1920 300 %}" alt="{{ page.title }}" title="{{ page.title }}">
+            {% else %}
+                {% page_menu "pages/page_banner.html" %}
+            {% endif %}
+        {% endblock page_banner %}
     {% endspaceless %}
 
     <div class="center">
@@ -41,7 +47,9 @@
                             <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count"
                                  data-action="like" data-show-faces="false" data-share="true"></div>
                         </li>
-                                                <li class="share-email">
+                        {% comment %}
+                        <!-- IMPLEMENTACAO FUTURA -->
+                        <li class="share-email">
                             <button class="mail btn-email">Enviar por e-mail</button>
                             <div class="dialog-email">
                                 <form class="form-email" action="" method="POST">
@@ -64,6 +72,7 @@
                                 </div>
                             </div>
                         </li>
+                        {% endcomment %}
 
                     </ul>
                 {% endif %}

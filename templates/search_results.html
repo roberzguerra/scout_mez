@@ -1,6 +1,6 @@
-{% extends "base.html" %}
-
-{% load i18n mezzanine_tags %}
+{#{% extends "base.html" %}#}
+{% extends "pages/page.html" %}
+{% load i18n future mezzanine_tags %}
 
 {% block meta_title %}{% trans "Search Results" %}{% endblock %}
 {% block title %}{% trans "Search Results" %}{% endblock %}
@@ -8,15 +8,26 @@
 <meta name="robots" content="noindex">
 {% endblock %}
 
-{% block breadcrumb_menu %}
-<li>
-    <a href="{% url "home" %}">{% trans "Home" %}</a>
-</li>
-<li class="active">{% trans "Search Results" %}</li>
-{% endblock %}
 
-{% block main %}
+{% comment %}
+    {% block breadcrumb_menu %}
+    <li>
+        <a href="{% url "home" %}">{% trans "Home" %}</a>
+    </li>
+    <li class="active">{% trans "Search Results" %}</li>
+    {% endblock %}
+{% endcomment %}
+{% block page_banner %}
+{% endblock page_banner %}
 
+{% block content_main %}
+    <div class="center">
+
+        {% block main %}
+
+            <div class="inner-banner"></div>
+
+            {% search_form "blog.BlogPost" %}
 <p>
 {% if results.paginator.count == 0 %}
 {% blocktrans %}
@@ -29,27 +40,16 @@ Showing {{ start }} to {{ end }} of {{ total }} results in {{ search_type }} mat
 {% endif %}
 </p>
 
-<div id="search-results">
-{% for result in results.object_list %}
-{% with result.get_absolute_url as result_url %}
-    <h5>
-        {{ forloop.counter0|add:results.start_index }})
-        {% if result_url %}
-            <a href="{{ result_url }}">{{ result }}</a>
-        {% else %}
-            {{ result }}
-        {% endif %}
-    </h5>
-    {% if result.description != result|stringformat:"s" %}
+    <div id="search-results">
+        {% for result in results.object_list %}
+        <h5>{{ forloop.counter0|add:results.start_index }})
+            <a href="{{ result.get_absolute_url }}">{{ result }}</a></h5>
         <p>{{ result.description|truncatewords_html:20|safe }}</p>
-    {% endif %}
-    {% if result_url %}
-        <a href="{{ result_url }}">{% trans "read more" %}</a>
-    {% endif %}
-{% endwith %}
-{% endfor %}
-</div>
+        <a href="{{ result.get_absolute_url }}">{% trans "read more" %}</a>
+        {% endfor %}
+    </div>
 
-{% pagination_for results %}
-
-{% endblock %}
+    {% pagination_for results %}
+    {% endblock main %}
+    </div>
+{% endblock content_main %}

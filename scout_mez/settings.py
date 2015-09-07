@@ -54,29 +54,25 @@ PAGE_MENU_TEMPLATES = (
 # field instance. When specifying the field class, the path
 # ``django.models.db.`` can be omitted for regular Django model fields.
 #
-# EXTRA_MODEL_FIELDS = (
-#     (
-#         # Dotted path to field.
-#         "mezzanine.blog.models.BlogPost.image",
-#         # Dotted path to field class.
-#         "somelib.fields.ImageField",
-#         # Positional args for field class.
-#         (_("Image"),),
-#         # Keyword args for field class.
-#         {"blank": True, "upload_to": "blog"},
-#     ),
-#     # Example of adding a field to *all* of Mezzanine's content types:
-#     (
-#         "mezzanine.pages.models.Page.another_field",
-#         "IntegerField", # 'django.db.models.' is implied if path is omitted.
-#         (_("Another name"),),
-#         {"blank": True, "default": 1},
-#     ),
-# )
-
-# Setting to turn on featured images for blog posts. Defaults to False.
-#
-# BLOG_USE_FEATURED_IMAGE = True
+EXTRA_MODEL_FIELDS = (
+    # (
+    #     # Dotted path to field.
+    #     "mezzanine.blog.models.BlogPost.image",
+    #     # Dotted path to field class.
+    #     "somelib.fields.ImageField",
+    #     # Positional args for field class.
+    #     (_("Image"),),
+    #     # Keyword args for field class.
+    #     {"blank": True, "upload_to": "blog"},
+    # ),
+    # Example of adding a field to *all* of Mezzanine's content types:
+    (
+        "mezzanine.pages.models.Page.image",
+        "mezzanine.core.fields.FileField", # 'django.db.models.' is implied if path is omitted.
+        (_(u"Imagem de Destaque"),),
+        {'format': "Image", 'max_length': 255, 'blank':True},
+    ),
+)
 
 # If True, the django-modeltranslation will be added to the
 # INSTALLED_APPS setting.
@@ -85,6 +81,8 @@ USE_MODELTRANSLATION = False
 # BLOG SETTINGS
 BLOG_USE_FEATURED_IMAGE = True
 BLOG_SLUG = 'noticias'
+
+SEARCH_MODEL_CHOICES = ('pages.Page', 'blog.BlogPost')
 
 
 ########################
