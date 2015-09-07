@@ -22,6 +22,10 @@
     {% endif %}
     {% if page.has_children %}{% page_menu page %}{% endif %}
     {% endif %}
-
 {% endfor %}
+    {# IF para mostrar a migalha da /noticia #}
+    {% if '/noticias/' == request.META.PATH_INFO %}
+        <li id="breadcrumb-menu-noticias" class="active">{% trans "Notícias" %}</li>
+    {% endif %}
+
 {% endif %}

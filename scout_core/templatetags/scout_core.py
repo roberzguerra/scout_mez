@@ -15,3 +15,15 @@ def text(value):
     """
     return mark_safe(strip_tags(value))
 
+
+@register.filter
+def crop_text(text, value):
+    """
+    Corta texto e add os 2 pontos (...) no final
+    """
+    result = text
+    if len(result) > value:
+        result = u"%s..." % result[:value]
+
+    return result
+

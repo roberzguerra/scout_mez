@@ -1,5 +1,5 @@
 {% extends "blog/blog_post_list.html" %}
-{% load mezzanine_tags comment_tags keyword_tags rating_tags i18n future disqus_tags %}
+{% load mezzanine_tags comment_tags keyword_tags rating_tags i18n future disqus_tags scout_core %}
 
 {% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
 
@@ -36,11 +36,9 @@
     {% endblock %}
 
     {# CONTEUDO ########################################################### #}
-
         <div class="notice">
-
             {% if blog_post.description and blog_post.description != blog_post.title %}
-                <strong>{{ blog_post.description }}</strong>
+                <strong>{{ blog_post.description|safe }}</strong>
             {% endif %}
 {#            <p class="date">{% blocktrans with sometime=blog_post.publish_date|date:'d/m/Y \à\s H:i ' %}Publicado em {{ sometime }}{% endblocktrans %}</p>#}
             <p class="date">
@@ -58,8 +56,6 @@
                     {% endeditable %}
                 {% endblock %}
             </div>
-
-
 
 {% block blog_post_detail_keywords %}
     {% keywords_for blog_post as tags %}
@@ -105,14 +101,24 @@
                 {% with blog_post.get_previous_by_publish_date as previous %}
                 {% if previous %}
                     <li>
-                        <a href="{{ previous.get_absolute_url }}" class="back-list btn-style"><span>{{ previous }}</span><i class="btn"></i></a>
+                        <a href="{{ previous.get_absolute_url }}" class="back-list btn-style" alt="{% trans 'Anterior' %} - {{ previous.title|safe }}" title="{% trans 'Anterior' %} - {{ previous.title|safe }}">
+                            <span>{{ previous.title|crop_text:35 }}</span><i class="btn"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
                     </li>
                 {% endif %}
                 {% endwith %}
                 {% with blog_post.get_next_by_publish_date as next %}
                 {% if next %}
                     <li class="last">
-                        <a href="{{ next.get_absolute_url }}" class="back-list btn-style last"><span>{{ next }}</span><i class="arrow btn"></i></a>
+                        <a href="{{ next.get_absolute_url }}" class="back-list next-list btn-style last" alt="{% trans 'Anterior' %} - {{ next.title|safe }}" title="{% trans 'Anterior' %} - {{ next.title|safe }}">
+                            <span>{{ next.title|crop_text:35 }}</span><i class="arrow btn"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
                     </li>
                 {% endif %}
                 {% endwith %}
@@ -122,11 +128,9 @@
 
         </div>
         <div class="comments">
-            <strong>Comentários</strong>
-            <div id="disqus_thread"></div>
-            {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-            {% include "generic/includes/disqus_counts.html" %}
-            {% endif %}
+            {% block blog_post_detail_comments %}
+                {% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
+            {% endblock %}
             {% comment %}<script type="text/javascript">
                 var disqus_shortname = 'matheusazzi',
                 disqus_url = 'http://www.matheusazzi.com/blog/criando-aplicacoes-com-node/';
@@ -246,11 +250,13 @@
     {% endblock %}
 {% endcomment %}
 
+{% comment %}
 {% block blog_post_detail_sharebuttons %}
     {% set_short_url_for blog_post %}
     <a class="btn btn-sm share-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">{% trans "Share on Twitter" %}</a>
     <a class="btn btn-sm share-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">{% trans "Share on Facebook" %}</a>
 {% endblock %}
+{% endcomment %}
 
 {% comment %}
     {% block blog_post_previous_next %}
@@ -287,9 +293,5 @@
 {% endif %}
 {% endblock %}
 {% endcomment %}
-
-{% block blog_post_detail_comments %}
-{% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
-{% endblock %}
 
 {% endblock %}

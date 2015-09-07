@@ -734,6 +734,10 @@ textarea {
   left: 12%;
 }
 
+.next-list i {
+  background-position: 0px -291px;
+}
+
 @media screen and (min-width: 20em) {
   .circles .back {
     opacity: 1;
@@ -2490,24 +2494,27 @@ footer a.phone span {
 }
 
 #main h2 {
-  width: 140px;
+  width: 100%;
   margin: 0 auto 20px;
   color: #FFCC00;
-  font-size: 1.5em;
-  height: 42px;
+  height: auto;
   line-height: 42px;
   font-weight: normal;
   position: relative;
+  text-align: center;
+  font-size: 2.125em;
 }
 
 #main h2 span {
-  position: absolute;
+  position: relative;
   right: 0;
   top: 0;
   height: 42px;
   width: 42px;
   background-position: 0 -475px;
   background-color: #FFCC00;
+  display: inline-block;
+  margin: auto auto;
 }
 
 #main strong {
@@ -2696,10 +2703,6 @@ footer a.phone span {
 }
 
 @media screen and (min-width: 48em) {
-  #main h2 {
-    font-size: 2.125em;
-    width: 180px;
-  }
 
   #main .back-list {
     text-indent: 6%;

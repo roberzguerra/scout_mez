@@ -23,7 +23,9 @@
     {% spaceless %}
         {% block page_banner %}
             {% if page.image %}
-                <img src="{{ MEDIA_URL }}{% thumbnail page.image 1920 300 %}" alt="{{ page.title }}" title="{{ page.title }}">
+                <div class="inner-banner">
+                    <img src="{{ MEDIA_URL }}{% thumbnail page.image 1920 300 %}" alt="{{ page.title }}" title="{{ page.title }}">
+                </div>
             {% else %}
                 {% page_menu "pages/page_banner.html" %}
             {% endif %}
@@ -38,7 +40,7 @@
                         {% page_menu "pages/menus/breadcrumb.html" %}
                     {% endblock %}
                 </ul>
-                {% if not blog_posts.object_list %}
+                {% block page_social %}
                     <ul class="share clearfix">
                         <li class="share-twitter">
                             <a href="https://twitter.com/share" class="twitter-share-button" {# data-via="Escoteiros" #} data-lang="en">Tweet</a>
@@ -73,9 +75,8 @@
                             </div>
                         </li>
                         {% endcomment %}
-
                     </ul>
-                {% endif %}
+                {% endblock page_social %}
             </div>
         {% endspaceless %}
         <div class="box-main">

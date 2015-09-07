@@ -1,4 +1,17 @@
-{#{% extends "base.html" %}#}
+{% extends 'blog/blog_post_list.html' %}
+
+{% block page_social %}
+{% endblock page_social %}
+
+{% if request.GET.type == 'blog.BlogPost' %}
+    {% block blog_list_post %}
+        {% with results as blog_posts %}
+            {{ block.super }}
+        {% endwith %}
+    {% endblock %}
+{% endif %}
+
+{% comment %}
 {% extends "pages/page.html" %}
 {% load i18n future mezzanine_tags %}
 
@@ -7,6 +20,7 @@
 {% block extra_head %}
 <meta name="robots" content="noindex">
 {% endblock %}
+{% endcomment %}
 
 
 {% comment %}
@@ -16,10 +30,14 @@
     </li>
     <li class="active">{% trans "Search Results" %}</li>
     {% endblock %}
-{% endcomment %}
+
 {% block page_banner %}
 {% endblock page_banner %}
+{% endcomment %}
 
+
+
+{% comment %}
 {% block content_main %}
     <div class="center">
 
@@ -53,3 +71,4 @@ Showing {{ start }} to {{ end }} of {{ total }} results in {{ search_type }} mat
     {% endblock main %}
     </div>
 {% endblock content_main %}
+{% endcomment %}

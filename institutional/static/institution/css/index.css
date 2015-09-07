@@ -3113,9 +3113,9 @@ footer a.phone span {
         font-weight: normal;
         display: block;
         position: relative;
-        height: 47px;
+        height: auto;
         line-height: 47px;
-        width: 50rem;
+        width: 100%;
         text-align: center;
     }
 
