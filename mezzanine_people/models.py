@@ -68,3 +68,4 @@ class PersonCategory(Slugged):
     @models.permalink
     def get_absolute_url(self):
         return ("person_list_category", (), {"slug": self.slug})
+

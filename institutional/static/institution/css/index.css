@@ -3132,6 +3132,15 @@ footer a.phone span {
         margin: auto auto;
         display: inline-block;
     }
+    .tt-diretoria .chair {
+        display: block;
+        width: 43px;
+        height: 48px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-position: 0 -1124px;
+    }
 
     .description {
         color: #333;
@@ -3503,7 +3512,184 @@ footer a.phone span {
     }
 }
 
-/* TODO: Personalizados ################################################################################### */
+/* DIRETORIA INICIO ######################################################################################## */
+@media screen and (min-width: 20em), screen and (max-width: 20em) {
+  .tt-diretoria {
+    color: #A3AC1D;
+    font-size: 32px;
+    font-weight: normal;
+    display: block;
+    position: relative;
+    height: 42px;
+    line-height: 42px;
+    width: 299px;
+    margin: 0 auto 40px;
+    letter-spacing: -0.5px;
+  }
+
+  .tt-diretoria span {
+    display: block;
+    width: 43px;
+    height: 48px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-position: 0 -1124px;
+  }
+
+  .descricao {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    line-height: 150%;
+    margin-bottom: 10px;
+  }
+
+  .descricao.last {
+    margin-bottom: 0;
+  }
+
+  .lista-diretoria {
+    margin-top: 40px;
+  }
+
+  .lista-diretoria li {
+    list-style: none;
+    margin-bottom: 40px;
+  }
+
+  .content-img {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+  }
+
+  .content-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .content-infos {
+    margin-top: 20px;
+  }
+
+  .content-infos strong {
+    color: #333;
+    font-size: 16px;
+    line-height: 100%;
+    display: block;
+    margin-bottom: 11px;
+    text-align: center;
+  }
+
+  .content-infos span {
+    display: block;
+    line-height: 100%;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 11px;
+    text-align: center;
+  }
+
+  .content-infos a {
+    text-align: center;
+    display: block;
+    line-height: 100%;
+    color: #333;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .content-infos a:active,
+  .content-infos a:focus,
+  .content-infos a:hover {
+    text-decoration: underline;
+  }
+}
+
+@media screen and (min-width: 37.5em) {
+  .lista-diretoria {
+    width: 500px;
+    margin: 62px auto 0;
+  }
+
+  .lista-diretoria li {
+    clear: both;
+    height: 180px;
+    margin-bottom: 40px;
+  }
+
+  .content-img {
+    float: left;
+  }
+
+  .content-infos {
+    float: left;
+    margin-top: 0;
+    margin-left: 20px;
+    height: 180px;
+    display: table;
+  }
+
+  .content-infos .content {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .content-infos strong {
+    text-align: left;
+  }
+
+  .content-infos span {
+    text-align: left;
+  }
+
+  .content-infos a {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 59.375em) {
+  main {
+    padding-bottom: 60px;
+  }
+
+  .tt-diretoria {
+    width: 326px;
+    letter-spacing: 0;
+  }
+
+  .descricao {
+    width: 730px;
+    margin: 0 auto;
+  }
+
+  .lista-diretoria {
+    width: 922px;
+  }
+
+  .lista-diretoria li {
+    clear: none;
+    float: left;
+    margin: 0 34px 40px 0;
+  }
+
+  .lista-diretoria li:nth-child(2) {
+    margin-right: 0;
+  }
+
+  .lista-diretoria li:nth-child(2n+2) {
+    margin-right: 0;
+  }
+
+  footer {
+    clear: both;
+  }
+}
+/* DIRETORIA FIM ################################################################################### */
+
+/* Personalizados ################################################################################### */
 
 .box-main p {
     margin: 0 0 20px 0;

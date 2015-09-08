@@ -32,6 +32,7 @@ class Team(Page, RichText):
         verbose_name_plural = _(u"Equipes")
 
 
+
 # class Homepage(Page):
 #     """
 #
