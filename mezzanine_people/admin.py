@@ -15,6 +15,7 @@ person_fieldsets[0][1]["fields"].extend(["first_name", "last_name", "job_title",
                                          "mugshot", "mugshot_credit", "bio", "email",
                                          "order"])
 person_list_display.insert(0, "admin_thumb")
+person_list_display.insert(2, 'full_name')
 
 
 class PersonLinkInline(admin.TabularInline):
@@ -28,7 +29,8 @@ class PersonAdmin(DisplayableAdmin):
 
     fieldsets = person_fieldsets
     list_display = person_list_display
-    filter_horizontal = ("categories",)
+
+    list_filter = ("categories","status",)
     inlines = [
         PersonLinkInline,
     ]

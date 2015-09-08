@@ -22,17 +22,21 @@
 {% block content_main %}
     {% spaceless %}
         {% block page_banner %}
-            {% if page.image %}
-                <div class="inner-banner">
-                    <img src="{{ MEDIA_URL }}{% thumbnail page.image 1920 300 %}" alt="{{ page.title }}" title="{{ page.title }}">
-                </div>
-            {% else %}
-                {% page_menu "pages/page_banner.html" %}
-            {% endif %}
+            {% page_menu "pages/page_banner.html" %}
         {% endblock page_banner %}
     {% endspaceless %}
 
     <div class="center">
+    {% if page.children.count > 0 %}
+            <div class="related clearfix tags">
+                <ul class="section">
+                {% for child in page.children.all %}
+                    <li><a href="{{ child.get_absolute_url }}">{{ child.title }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
         {% spaceless %}
             <div class="migalha clearfix">
                 <ul class="section">
@@ -79,6 +83,7 @@
                 {% endblock page_social %}
             </div>
         {% endspaceless %}
+
         <div class="box-main">
         {% block main %}
 

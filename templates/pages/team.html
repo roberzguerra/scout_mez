@@ -4,7 +4,7 @@
 
 {% block main %}{{ block.super }}
 <strong class="tt-escotismo">
-    {{ page.title }} <span class="titles-bgs ir chair">equipes: {{ page.title }}</span>
+    {{ page.title }} <span class="titles-bgs ir chair">{{ page.title }}</span>
 </strong>
     {% editable page.team.content %}
         {{ page.team.content|richtext_filters|safe }}
@@ -33,6 +33,14 @@
                             {% if person.bio %}
                                 <p>{{ person.bio|safe }}</p>
                             {% endif %}
+                            {% if person.personlink_set.count > 0 %}
+                                <p>
+                                {% for link in person.personlink_set.all %}
+                                    {{ link.name }} - {{ link.url }} <br>
+                                {% endfor %}
+                                </p>
+                            {% endif %}
+
                         </div>
                     </div>
                 </li>

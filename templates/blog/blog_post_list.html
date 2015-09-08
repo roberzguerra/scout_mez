@@ -3,7 +3,7 @@
 {% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags %}
 
 {% block extra_head_css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}institution/css/noticias.css">
+{#    <link rel="stylesheet" href="{{ STATIC_URL }}institution/css/noticias.css">#}
 {% endblock extra_head_css %}
 
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Notícias" %}{% endif %}{% endblock %}
@@ -21,21 +21,23 @@
 {% endmetablock %}{% endblock %}
 
 {% block breadcrumb_menu %}
-{{ block.super }}
-{% if tag or category or year or month or author %}
-<li>{% spaceless %}
-{% if tag %}
-    {% trans "Tag:" %} {{ tag }}
-{% else %}{% if category %}
-    {% trans "Category:" %} {{ category }}
-{% else %}{% if year or month %}
-    {% if month %}{{ month }}, {% endif %}{{ year }}
-{% else %}{% if author %}
-    {% trans "Author:" %} {{ author.get_full_name|default:author.username }}
-{% endif %}{% endif %}{% endif %}{% endif %}
-{% endspaceless %}
-</li>
-{% endif %}
+    {{ block.super }}
+    {% if tag or category or year or month or author %}
+
+    <li id="breadcrumb-menu-{{ blog_post.id }}" class="active">
+        {% spaceless %}
+        {% if tag %}
+            {% trans "Tag:" %} {{ tag }}
+        {% else %}{% if category %}
+            {% trans "Category:" %} {{ category }}
+        {% else %}{% if year or month %}
+            {% if month %}{{ month }}, {% endif %}{{ year }}
+        {% else %}{% if author %}
+            {% trans "Author:" %} {{ author.get_full_name|default:author.username }}
+        {% endif %}{% endif %}{% endif %}{% endif %}
+        {% endspaceless %}
+    </li>
+    {% endif %}
 {% endblock %}
 
 {% block body_class %}branch-escoteiro{% endblock %}
@@ -62,14 +64,14 @@
     {% block blog_post_list_filterinfo %}
     <p>
     {% if tag %}
-        {% trans "Viewing posts tagged" %} {{ tag }}
+        {% trans "Notícias com a Tag" %} {{ tag }}
     {% else %}{% if category %}
-        {% trans "Viewing posts for the category" %} {{ category }}
+        {% trans "Notícias com a Categoria" %} {{ category }}
     {% else %}{% if year or month %}
-        {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
+        {% trans "Notícias de" %} {% if month %}{{ month }}, {% endif %}
         {{ year }}
     {% else %}{% if author %}
-        {% trans "Viewing posts by" %}
+        {% trans "Notícias por" %}
         {{ author.get_full_name|default:author.username }}
     {% endif %}{% endif %}{% endif %}{% endif %}
     {% endblock %}

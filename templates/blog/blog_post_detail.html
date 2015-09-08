@@ -26,7 +26,7 @@
 
 {% block breadcrumb_menu %}
     {{ block.super }}
-    <li class="selected">{{ blog_post.title }}</li>
+    <li id="breadcrumb-menu-{{ blog_post.id }}" class="active">{{ blog_post.title }}</li>
 {% endblock %}
 
 {% block main %}
@@ -57,10 +57,20 @@
                 {% endblock %}
             </div>
 
+        <div class="related clearfix tags">
+            <div class="links">
+                <strong>{% trans "Categoria" %}</strong>
+                <ul>
+                {% for category in blog_post.categories.all %}
+                    <li><a class="link" href="{% url "blog_post_list_category" category.slug %}"><span class="titles-bgs buss"></span> {{ category }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+
 {% block blog_post_detail_keywords %}
     {% keywords_for blog_post as tags %}
     {% if tags %}
-
     {% spaceless %}
         <div class="related clearfix tags">
             <div class="links">
