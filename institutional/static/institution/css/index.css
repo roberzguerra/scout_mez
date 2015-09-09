@@ -733,6 +733,9 @@ textarea {
     background-position: 0px -439px;
     left: 12%;
 }
+.back-list.next-list i {
+    background-position: 0px -291px;
+}
 
 @media screen and (min-width: 20em) {
     .circles .back {
@@ -4379,9 +4382,9 @@ footer a.phone span {
   background-color: #92233F;
 }
 
-.branch-escoteiro .btn {
+/*.branch-escoteiro .btn {
   background: url("../img/buttons.png") no-repeat 0 0 transparent;
-}
+}*/
 
 .branch-escoteiro .titles-bgs {
   background: url("../img/bg-titles-scout.png") no-repeat 0 0 transparent;
@@ -4716,3 +4719,51 @@ footer a.phone span {
   float: left;
   margin: 0 4px 0 0;
 }
+
+/* SUBMENUS EM PAGES INICIO ####################################################################### */
+.page-menu {
+    padding: 0;
+    margin: 0 0 1rem 0;
+    border: 2px solid #CCC;
+    float: left;
+    width: 100%;
+}
+.page-menu ul {
+    width: auto;
+    height: auto;
+    -webkit-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+
+.page-menu li {
+    list-style: none;
+    padding: 7px 0;
+    position: relative;
+    /*line-height: 3rem;*/
+    width: auto;
+    float: left;
+    margin: 0 1rem 0 0;
+}
+.page-menu a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9375em;
+    float: left;
+}
+
+.page-menu a.active, .page-menu li.active a, .page-menu a:hover {
+    color: #AEBE18;
+}
+
+.titles-bgs.liss {
+    padding: 0;
+    background: url("../img/bg-titles.png") no-repeat left -1389px;
+    display: block;
+    width: 42px;
+    height: 52px;
+    float: left;
+    margin: 0px 4px 0 0;
+}
+/* SUBMENUS EM PAGES FIM ####################################################################### */

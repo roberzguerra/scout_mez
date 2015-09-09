@@ -18,7 +18,6 @@
                     <div class="content-img">
                         {% if person.mugshot %}
                             <img src="{{ MEDIA_URL }}{% thumbnail person.mugshot 182 182 %}" alt="Pessoa">
-
                         {% else %}
                             <img src="{{ STATIC_URL }}institution/img/img-02.jpg" alt="Pessoa">
                         {% endif %}
