@@ -32,10 +32,9 @@
                 <ul class="section">
                 {% for child in page.children.all %}
                     <li><a href="{{ child.get_absolute_url }}" class="link">
-{#                        <span class="titles-bgs liss"></span>#}
+                        <i class="fa fa-paper-plane-o"></i>
                         {{ child.title }}</a>
                     </li>
-                    <li>|</li>
                 {% endfor %}
                 </ul>
             </div>

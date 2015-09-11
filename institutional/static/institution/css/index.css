@@ -4724,7 +4724,8 @@ footer a.phone span {
 .page-menu {
     padding: 0;
     margin: 0 0 1rem 0;
-    border: 2px solid #CCC;
+    border: 0;
+    border-bottom: 2px solid #CCC;
     float: left;
     width: 100%;
 }
@@ -4758,12 +4759,6 @@ footer a.phone span {
 }
 
 .titles-bgs.liss {
-    padding: 0;
-    background: url("../img/bg-titles.png") no-repeat left -1389px;
-    display: block;
-    width: 42px;
-    height: 52px;
-    float: left;
-    margin: 0px 4px 0 0;
+
 }
 /* SUBMENUS EM PAGES FIM ####################################################################### */
