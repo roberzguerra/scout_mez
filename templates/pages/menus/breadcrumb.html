@@ -24,7 +24,16 @@
     {% endif %}
 {% endfor %}
     {# IF para mostrar a migalha da /noticia #}
-    {% if '/noticias/' == request.META.PATH_INFO %}
-        <li id="breadcrumb-menu-noticias" class="active">{% trans "Notícias" %}</li>
+
+    {% if '/noticias/' == request.META.PATH_INFO or request.GET.type == 'blog.BlogPost' %}
+        {% if request.GET.q %}
+            <li id="breadcrumb-menu-noticias">
+                <a href="{% url 'blog_post_list' %}">{% trans "Notícias" %}</a>
+            </li>
+            <li id="breadcrumb-menu-search" class="active">{{ request.GET.q }}</li>
+        {% else %}
+            <li id="breadcrumb-menu-noticias" class="active">{% trans "Notícias" %}</li>
+        {% endif %}
+
     {% endif %}
 {% endif %}

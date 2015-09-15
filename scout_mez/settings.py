@@ -22,6 +22,7 @@ ADMIN_MENU_ORDER = (
     ("Users", ("auth.User", "auth.Group",)),
     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
     ("mezzanine_people", ("people.PersonCategory", "people.Person")),
+    ("scout_group", ("scout_group.District")), #"scout_group.ScoutGroup"
 )
 
 # A three item sequence, each containing a sequence of template tags
@@ -69,7 +70,7 @@ EXTRA_MODEL_FIELDS = (
     (
         "mezzanine.pages.models.Page.image",
         "mezzanine.core.fields.FileField", # 'django.db.models.' is implied if path is omitted.
-        (_(u"Imagem de Destaque"),),
+        (_(u"Imagem de Destaque, proporção 1920"),),
         {'format': "Image", 'max_length': 255, 'blank':True},
     ),
 )
@@ -262,6 +263,7 @@ INSTALLED_APPS = (
     # Criados
     "institutional",
     "events",
+    "scout_group",
 )
 
 # List of processors used by RequestContext to populate the context.
