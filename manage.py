@@ -2,6 +2,11 @@
 import os
 import sys
 
+from django.conf import settings
+
+# ('/home/guerra/git/scout_mez/scout_mez', 'scout_mez', '/home/guerra/git/scout_mez')
+
+
 if __name__ == "__main__":
 
     from mezzanine.utils.conf import real_project_name
