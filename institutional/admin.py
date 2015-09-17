@@ -6,12 +6,14 @@ from mezzanine.conf import settings
 from mezzanine.pages.admin import PageAdmin
 
 from models import Team, ScoutGroupPage
-
+from scout_core.admin import page_fieldsets as scout_core_page_fields
 
 class TeamAdmin(PageAdmin):
     """
     Admin para a Pagina de Equipes
     """
+
+    fieldsets = scout_core_page_fields
 
     #fieldsets = ((None, {"fields": ("title",)}),)
 
@@ -28,6 +30,8 @@ class ScoutGroupPageAdmin(PageAdmin):
     """
     Admin para a Pagina de Grupos e Distritos
     """
+    fieldsets = scout_core_page_fields
+
 
 admin.site.register(Team, TeamAdmin)
 admin.site.register(ScoutGroupPage, ScoutGroupPageAdmin)

@@ -70,8 +70,8 @@ EXTRA_MODEL_FIELDS = (
     (
         "mezzanine.pages.models.Page.image",
         "mezzanine.core.fields.FileField", # 'django.db.models.' is implied if path is omitted.
-        (_(u"Imagem de Destaque, proporção 1920"),),
-        {'format': "Image", 'max_length': 255, 'blank':True},
+        (_(u"Imagem de Destaque"),),
+        {'format': "Image", 'max_length': 255, 'blank':True, 'help_text': u"Proporção 1920x300px."},
     ),
 )
 
@@ -259,6 +259,7 @@ INSTALLED_APPS = (
     "scout_core",
     "bootstrap3",
     "mezzanine_people",
+    "mezzanine_file_collections",
 
     # Criados
     "institutional",

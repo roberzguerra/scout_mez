@@ -3,16 +3,16 @@ from copy import deepcopy
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
-
-from mezzanine.core.admin import DisplayableAdmin
+from mezzanine.core.admin import DisplayableAdmin, TabularDynamicInlineAdmin
 from events.forms import EventForm, EventProgramationForm
 from events.models import Event, EventProgramation
 
 
 
-class EventProgramationInline(admin.TabularInline):
+class EventProgramationInline(TabularDynamicInlineAdmin):
     model = EventProgramation
-    form = EventProgramationForm
+    #form = EventProgramationForm
+    extra = 1
     fieldsets = (
         (None, {
             "fields": ["name", "status", "image", "date_time", "content"],

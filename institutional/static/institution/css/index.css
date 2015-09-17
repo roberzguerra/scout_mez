@@ -4816,12 +4816,6 @@ footer a.phone span {
 
 @media screen and (min-width: 37.5em) {
 
-  .description {
-    width: 385px;
-    text-align: center;
-    margin: 0 auto;
-  }
-
   .formBuscar {
     width: 580px;
   }
@@ -4921,9 +4915,50 @@ footer a.phone span {
         width: auto;
     }
 }
-
-
 /* PAGINAS DE GRUPOS E DISTRITOS FIM ######################################################## */
+
+/* PAGINA DOWNLOADS INICIO ######################################################## */
+.page-download .content {
+    margin: 0 0 2rem 0;
+    padding: 0 0 1rem 0;
+    border-bottom: 2px solid #CCC;
+}
+
+.page-download .folder-list {
+    width: 100%;
+    display: inline-block;
+}
+
+.page-download .folder-list li {
+    list-style: none;
+    width: auto;
+    float: left;
+    margin: 1rem;
+    /* border: 1px solid #000; */
+    text-align: center;
+    max-width: 200px;
+}
+.page-download .folder-list .link {
+    color: #004a8d;
+    text-decoration: none;
+}
+.page-download .folder-list .link:hover{
+    color: #00853e;
+}
+.page-download .folder-list .fa-folder {
+    font-size: 100px;
+}
+
+.page-download .folder-list .fa-file {
+    font-size: 64px;
+}
+
+.page-download .folder-list .fa-file,
+ .page-download .folder-list .media-object {
+    display: block;
+}
+
+/* PAGINA DOWNLOADS FIM ######################################################## */
 
 /* Personalizados ################################################################################### */
 

@@ -27,18 +27,20 @@
     {% endspaceless %}
 
     <div class="center">
-        {% if page.children.count > 0 %}
-            <div class="page-menu">
-                <ul class="section">
-                {% for child in page.children.all %}
-                    <li><a href="{{ child.get_absolute_url }}" class="link">
-                        <i class="fa fa-paper-plane-o"></i>
-                        {{ child.title }}</a>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+        {% block pages_children %}
+            {% if page.children.count > 0 %}
+                <div class="page-menu">
+                    <ul class="section">
+                    {% for child in page.children.all %}
+                        <li><a href="{{ child.get_absolute_url }}" class="link">
+                            <i class="fa fa-paper-plane-o"></i>
+                            {{ child.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endblock pages_children %}
 
         {% spaceless %}
             <div class="migalha clearfix">
