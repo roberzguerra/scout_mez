@@ -5,7 +5,8 @@ from django.contrib import admin
 from mezzanine.conf import settings
 from mezzanine.pages.admin import PageAdmin
 
-from models import Team
+from models import Team, ScoutGroupPage
+
 
 class TeamAdmin(PageAdmin):
     """
@@ -23,5 +24,10 @@ class TeamAdmin(PageAdmin):
     #             return True
     #     return False
 
+class ScoutGroupPageAdmin(PageAdmin):
+    """
+    Admin para a Pagina de Grupos e Distritos
+    """
 
 admin.site.register(Team, TeamAdmin)
+admin.site.register(ScoutGroupPage, ScoutGroupPageAdmin)

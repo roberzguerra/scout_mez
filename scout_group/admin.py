@@ -22,7 +22,7 @@ scout_group_fieldsets[0][1]["fields"][0] = 'name'
 scout_group_fieldsets[0][1]["fields"].insert(1, 'number')
 scout_group_fieldsets[0][1]["fields"].insert(2, 'district')
 scout_group_fieldsets[0][1]["fields"].insert(3, 'logo')
-scout_group_fieldsets[0][1]["fields"].extend(["president_name", "email", "uf", "address", "cep", "content", "image" ]   )
+scout_group_fieldsets[0][1]["fields"].extend(["president_name", "email", "uf", "city", "address", "cep", "content", "image" ]   )
 
 
 
@@ -63,6 +63,9 @@ class ScoutGroupAdmin(DisplayableAdmin):
     Admin para ScoutGroup
     """
     fieldsets = scout_group_fieldsets
+    list_display = ["admin_thumb", "__unicode__", "city", "status",]
+    list_display_links = ['__unicode__', ]
+    list_filter = ['name', 'number',]
 
     form = ScoutGroupForm
 

@@ -37,6 +37,8 @@ urlpatterns += patterns('',
     # one out.
 
     url("^$", direct_to_template, {"template": "index.html"}, name="home"),
+    url("^eventos/", include("events.urls", namespace='events')),
+    url("^grupos/", include("scout_group.urls")),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
@@ -77,7 +79,6 @@ urlpatterns += patterns('',
     url("^", include("mezzanine.urls")),
     url("^institucional/", include("institutional.urls")),
     url("^equipes/", include("mezzanine_people.urls")),
-    #url("^grupos/", include("scout_group.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------

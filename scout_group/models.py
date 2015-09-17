@@ -54,6 +54,7 @@ class District(Displayable, RichText, AdminThumbMixin):
         Preenche o title com o valor de name
         """
         self.title = self.name
+        self.slug = self.number
         super(District, self).save(*args, **kwargs)
 
 class ScoutGroup(Displayable, RichText, AdminThumbMixin):
@@ -80,8 +81,9 @@ class ScoutGroup(Displayable, RichText, AdminThumbMixin):
     number = models.IntegerField(verbose_name=_(u"Numeral"), null=False, blank=False)
     district = models.ForeignKey(verbose_name=_(u"Distrito"), to=District)
     logo = FileField(verbose_name=_(u"Logo do Grupo"), upload_to="grupos_escoteiros", format="Image", max_length=255,
-                     null=True, blank=True, help_text=_(u'Envie uma imagem com proporção de 140x140px'))
+                     null=True, blank=True, help_text=_(u'Envie uma imagem com proporção de 182x182px'))
     uf = models.CharField(verbose_name=_(u"UF"), max_length=2, choices=UF, null=False, blank=False, default=UF[0][0], help_text=_(u"Estado do Grupo Escoteiro."))
+    city = models.CharField(verbose_name=_(u"cidade"), blank=True, max_length=500)
     address = models.CharField(verbose_name=_(u"Endereço"), blank=True, max_length=500)
     cep = models.CharField(verbose_name=_(u"CEP"), blank=True, max_length=8)
     email = models.EmailField(blank=True, max_length=255)
@@ -116,4 +118,5 @@ class ScoutGroup(Displayable, RichText, AdminThumbMixin):
         Preenche o title com o valor de name
         """
         self.title = unicode(self)
+        self.slug = self.number
         super(ScoutGroup, self).save(*args, **kwargs)

@@ -4571,22 +4571,22 @@ footer a.phone span {
     margin-bottom: 40px;
   }
 
-  .content-img {
+  .lista-diretoria .content-img {
     width: 180px;
     height: 180px;
     margin: 0 auto;
   }
 
-  .content-img img {
+  .lista-diretoria .content-img img {
     width: 100%;
     height: auto;
   }
 
-  .content-infos {
+  .lista-diretoria .content-infos {
     margin-top: 20px;
   }
 
-  .content-infos strong {
+  .lista-diretoria .content-infos strong {
     color: #333;
     font-size: 16px;
     line-height: 100%;
@@ -4595,7 +4595,7 @@ footer a.phone span {
     text-align: center;
   }
 
-  .content-infos span {
+  .lista-diretoria .content-infos span {
     display: block;
     line-height: 100%;
     color: #333;
@@ -4604,7 +4604,7 @@ footer a.phone span {
     text-align: center;
   }
 
-  .content-infos a {
+  .lista-diretoria .content-infos a {
     text-align: center;
     display: block;
     line-height: 100%;
@@ -4613,30 +4613,30 @@ footer a.phone span {
     text-decoration: none;
   }
 
-  .content-infos a:active,
-  .content-infos a:focus,
-  .content-infos a:hover {
+  .lista-diretoria .content-infos a:active,
+  .lista-diretoria .content-infos a:focus,
+  .lista-diretoria .content-infos a:hover {
     text-decoration: underline;
   }
 }
 
 @media screen and (min-width: 37.5em) {
-  .lista-diretoria {
+  .lista-diretoria .lista-diretoria {
     width: 500px;
     margin: 62px auto 0;
   }
 
-  .lista-diretoria li {
+  .lista-diretoria .lista-diretoria li {
     clear: both;
     height: 180px;
     margin-bottom: 40px;
   }
 
-  .content-img {
+  .lista-diretoria .content-img {
     float: left;
   }
 
-  .content-infos {
+  .lista-diretoria .content-infos {
     float: left;
     margin-top: 0;
     margin-left: 20px;
@@ -4644,20 +4644,20 @@ footer a.phone span {
     display: table;
   }
 
-  .content-infos .content {
+  .lista-diretoria .lista-diretoria .content-infos .content {
     display: table-cell;
     vertical-align: middle;
   }
 
-  .content-infos strong {
+  .lista-diretoria .content-infos strong {
     text-align: left;
   }
 
-  .content-infos span {
+  .lista-diretoria .content-infos span {
     text-align: left;
   }
 
-  .content-infos a {
+  .lista-diretoria .content-infos a {
     text-align: left;
   }
 }
@@ -4701,6 +4701,230 @@ footer a.phone span {
 }
 /* DIRETORIA FIM ################################################################################### */
 
+/* PAGINAS DE GRUPOS E DISTRITOS INICIO ######################################################## */
+@media screen and (min-width: 20em), screen and (max-width: 20em) {
+.lista-distritos {
+    margin-top: 60px;
+  }
+
+  .lista-distritos li {
+    list-style: none;
+    margin-bottom: 40px;
+  }
+
+  .lista-distritos li:last-child {
+    margin-bottom: 0;
+  }
+
+  .lista-distritos .content-img {
+    border: 1px solid #E1E1E1;
+    width: 182px;
+    height: 182px;
+    margin: 0 auto;
+  }
+
+  .lista-distritos .content-img img {
+    width: auto;
+    height: auto;
+  }
+
+  .lista-distritos .content-infos {
+    margin-top: 20px;
+  }
+
+  .lista-distritos .content-infos a {
+    text-decoration: none;
+  }
+
+  .lista-distritos .content-infos strong {
+    line-height: 100%;
+    display: block;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .lista-distritos .content-infos b {
+    color: #333;
+    text-align: center;
+    font-size: 16px;
+    display: block;
+    line-height: 100%;
+    margin-bottom: 10px;
+  }
+
+  .lista-distritos .content-infos p {
+    text-align: left;
+    line-height: 120%;
+    color: #333;
+    font-size: 16px;
+  }
+}
+
+.lista-distritos .btn-load-district {
+  padding: 18px 12%;
+  margin-top: 60px;
+}
+
+.lista-distritos .btn-load-district i {
+  left: 80%;
+}
+
+@media screen and (min-width: 28.75em) {
+  .lista-distritos .btn-load-district {
+    padding: 18px 20%;
+  }
+
+  .lista-distritos .btn-load-district i {
+    left: 70%;
+  }
+}
+
+@media screen and (min-width: 48em) {
+  .lista-distritos .btn-load-district {
+    padding: 18px 34%;
+    max-width: 100%;
+  }
+
+  .lista-distritos .btn-load-district i {
+    left: 63%;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .lista-distritos .btn-load-district {
+    padding: 18px 37%;
+  }
+
+  .lista-distritos .btn-load-district i {
+    left: 61%;
+  }
+}
+
+@media screen and (min-width: 80em) {
+  .lista-distritos .btn-load-district {
+    padding: 18px 363px;
+  }
+
+  .lista-distritos .btn-load-district i {
+    left: 57%;
+  }
+
+  .lista-distritos .btn-load-district:hover i {
+    left: 61%;
+  }
+}
+
+@media screen and (min-width: 37.5em) {
+
+  .description {
+    width: 385px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .formBuscar {
+    width: 580px;
+  }
+
+  .txtBuscar {
+    width: 522px;
+    padding: 0 24px;
+  }
+
+  .lista-distritos {
+    margin: 60px auto 0;
+  }
+
+  .lista-distritos li {
+    clear: both;
+    height: 182px;
+    margin-bottom: 59px;
+  }
+
+  .lista-distritos .content-img {
+    margin: 0 22px 0 0;
+    float: left;
+  }
+
+  .lista-distritos .content-infos {
+    height: 182px;
+    width: 377px;
+    float: left;
+    display: table;
+    margin-top: 0;
+  }
+
+  .lista-distritos .content-infos strong {
+    text-align: left;
+  }
+
+  .lista-distritos .content-infos b {
+    text-align: left;
+  }
+
+  .lista-distritos .content-infos p {
+    text-align: left;
+  }
+
+  /*.lista-distritos .content {
+    display: table-cell;
+    vertical-align: middle;
+  }*/
+}
+
+@media screen and (min-width: 59.375em) {
+  main {
+    padding-bottom: 101px;
+  }
+
+  .formBuscar {
+    width: 622px;
+  }
+
+  .txtBuscar {
+    width: 561px;
+  }
+
+  .lista-distritos .content-infos {
+    width: 712px;
+  }
+}
+
+.lista-distritos .title {
+    color: #A3AC1D;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    display: block;
+}
+
+.lista-distritos .content {
+    color: #000;
+}
+
+.lista-distritos .content p {
+    margin: 0 0 10px 0;
+}
+
+.lista-distritos .content-district-groups {
+    padding: 0 0 2rem 2rem;
+    margin: 0 0 2rem 0;
+    float: left;
+    border-bottom: 2px solid #CCC;
+}
+.lista-distritos .content-district-groups .content-infos {
+    width: 40rem;
+}
+
+@media screen and (min-width: 20em), screen and (max-width: 20em) {
+    .lista-distritos .content-district-groups .content-infos {
+        width: auto;
+    }
+}
+
+
+/* PAGINAS DE GRUPOS E DISTRITOS FIM ######################################################## */
+
 /* Personalizados ################################################################################### */
 
 .box-main p {
@@ -4718,6 +4942,13 @@ footer a.phone span {
   background-position: 1px -1180px;
   float: left;
   margin: 0 4px 0 0;
+}
+.titles-bgs.liss {
+    background: url("../img/bg-titles.png") no-repeat left -1389px;
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    margin: 0 4px 0 0;
 }
 
 /* SUBMENUS EM PAGES INICIO ####################################################################### */
@@ -4757,8 +4988,5 @@ footer a.phone span {
 .page-menu a.active, .page-menu li.active a, .page-menu a:hover {
     color: #AEBE18;
 }
-
-.titles-bgs.liss {
-
-}
 /* SUBMENUS EM PAGES FIM ####################################################################### */
+
