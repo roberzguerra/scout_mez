@@ -12,7 +12,6 @@ from events.models import Event, EventProgramation
 class EventProgramationInline(TabularDynamicInlineAdmin):
     model = EventProgramation
     #form = EventProgramationForm
-    extra = 1
     fieldsets = (
         (None, {
             "fields": ["name", "status", "image", "date_time", "content"],
