@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from copy import deepcopy
 
 from django.contrib import admin
 
@@ -6,14 +7,14 @@ from mezzanine.conf import settings
 from mezzanine.pages.admin import PageAdmin
 
 from models import Team, ScoutGroupPage
-from scout_core.admin import page_fieldsets as scout_core_page_fields
+from scout_core.admin import page_fieldsets
 
 class TeamAdmin(PageAdmin):
     """
     Admin para a Pagina de Equipes
     """
 
-    fieldsets = scout_core_page_fields
+    fieldsets = page_fieldsets
 
     #fieldsets = ((None, {"fields": ("title",)}),)
 
@@ -25,6 +26,9 @@ class TeamAdmin(PageAdmin):
     #         if "people.PersonCategory" in items:
     #             return True
     #     return False
+
+scout_core_page_fields = deepcopy(page_fieldsets)
+scout_core_page_fields[0][1]["fields"].insert(5, u"type")
 
 class ScoutGroupPageAdmin(PageAdmin):
     """

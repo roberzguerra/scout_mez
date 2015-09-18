@@ -22,6 +22,12 @@
         {% with page.scoutgrouppage.get_scout_groups_type_district as district_list %}
             {% include 'scout_group/scoutgrouppage_list_district.html' %}
         {% endwith %}
+    {% elif page.scoutgrouppage.type == page.scoutgrouppage.TYPE_GROUP_ONLY_DISTRICT %}
+        {% with page.scoutgrouppage.get_scout_groups_type_district as district_list %}
+            {% with True as district_only %}
+                {% include 'scout_group/scoutgrouppage_list_district.html' %}
+            {% endwith %}
+        {% endwith %}
     {% endif %}
 
 

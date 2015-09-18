@@ -11,8 +11,8 @@
     {% if district %}
         <li id="breadcrumb-menu-district" class="active">{{ district }}</li>
     {% elif scout_group %}
-        <li id="breadcrumb-menu-district" class="active">
-            <a href="{{ district.get_absolute_url }}">{{ district }}</a>
+        <li id="breadcrumb-menu-district">
+            <a href="{{ scout_group.district.get_absolute_url }}">{{ scout_group.district }}</a>
         </li>
         <li id="breadcrumb-menu-scout_group" class="active">{{ scout_group }}</li>
     {% endif %}

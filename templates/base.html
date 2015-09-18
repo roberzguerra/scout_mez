@@ -106,14 +106,14 @@
    <header id="header" role="banner">
         <ul class="nav-sections clearfix">
             <li class="wanna-be"><a href="javascript:void(0);">Quero ser Escoteiro<span class="blt"></span></a></li>
-            <li class="institutional selected"><a href="">Institucional<span
+            <li class="institutional selected"><a href="{% url 'home' %}">Institucional<span
                     class="blt"></span></a></li>
             <li><a href="javascript:void(0);">Sou Escoteiro<span class="blt"></span></a></li>
         </ul>
 
         <nav class="menu" role="navegation">
             <h1 class="logo">
-                <a href="" class="ir">Escoteiros do Brasil - Rio Grande do Sul</a>
+                <a href="{% url 'home' %}" class="ir">Escoteiros do Brasil - Rio Grande do Sul</a>
             </h1>
             <button class="btn-menu"><span></span></button>
                 {% page_menu "pages/menus/dropdown.html" %}
