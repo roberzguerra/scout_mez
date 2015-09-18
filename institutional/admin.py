@@ -9,12 +9,16 @@ from mezzanine.pages.admin import PageAdmin
 from models import Team, ScoutGroupPage
 from scout_core.admin import page_fieldsets
 
+team_fields = deepcopy(page_fieldsets)
+team_fields[0][1]["fields"].insert(5, u"categories")
+
+
 class TeamAdmin(PageAdmin):
     """
     Admin para a Pagina de Equipes
     """
 
-    fieldsets = page_fieldsets
+    fieldsets = team_fields
 
     #fieldsets = ((None, {"fields": ("title",)}),)
 
