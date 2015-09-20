@@ -4623,12 +4623,12 @@ footer a.phone span {
 }
 
 @media screen and (min-width: 37.5em) {
-  .lista-diretoria .lista-diretoria {
+  .lista-diretoria {
     width: 500px;
     margin: 62px auto 0;
   }
 
-  .lista-diretoria .lista-diretoria li {
+ .lista-diretoria li {
     clear: both;
     height: 180px;
     margin-bottom: 40px;
@@ -4646,7 +4646,7 @@ footer a.phone span {
     display: table;
   }
 
-  .lista-diretoria .lista-diretoria .content-infos .content {
+  .lista-diretoria .content-infos .content {
     display: table-cell;
     vertical-align: middle;
   }
@@ -4696,10 +4696,12 @@ footer a.phone span {
   .lista-diretoria li:nth-child(2n+2) {
     margin-right: 0;
   }
+}
 
-  footer {
-    clear: both;
-  }
+.lista-diretoria li {
+    display: block;
+    float: left;
+    width: 100%;
 }
 /* DIRETORIA FIM ################################################################################### */
 
