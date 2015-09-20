@@ -37,7 +37,7 @@ class District(Displayable, RichText, AdminThumbMixin):
         if not self.name:
             return u"%0.2d" % (self.number)
         else:
-            return u"%s - %0.2dº" % (self.name, self.number)
+            return u"%0.2dº - %s" % (self.number, self.name)
 
     def get_short_name(self):
         """

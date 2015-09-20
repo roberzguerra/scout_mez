@@ -23,8 +23,11 @@
         {% if scout_group.cep %}
             <p>{% trans 'CEP' %}: {{ scout_group.cep }}</p>
         {% endif %}
-        {% editable scout_group.content %}
-            {{ scout_group.content|richtext_filters|safe }}
-        {% endeditable %}
+
+        {% if editable_obj %}
+            {% editable scout_group.content %}
+                {{ scout_group.content|richtext_filters|safe }}
+            {% endeditable %}
+        {% endif %}
     </div>
 </div>

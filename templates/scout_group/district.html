@@ -23,15 +23,21 @@
         {% if district.cep %}
             <p>{% trans 'CEP' %}: {{ district.cep }}</p>
         {% endif %}
-        {% editable district.content %}
-            {{ district.content|richtext_filters|safe }}
-        {% endeditable %}
+
+
+        {% if editable_obj %}
+            {% editable district.content %}
+                {{ district.content|richtext_filters|safe }}
+            {% endeditable %}
+        {% endif %}
 
     </div>
 </div>
 
 {% if not district_only and district.scoutgroup_set.count > 0 %}
+
     <div class="content-district-groups">
+        <h3 class="title">Grupos Escoteiros:</h3>
         {% with district.scoutgroup_set.all as scout_group_list %}
             {% include 'scout_group/scoutgrouppage_content.html' %}
         {% endwith %}
