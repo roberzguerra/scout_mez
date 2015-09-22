@@ -25,7 +25,7 @@ if settings.USE_MODELTRANSLATION:
         url('^i18n/$', 'django.views.i18n.set_language', name='set_language'),
     )
 
-urlpatterns += patterns('',
+urlpatterns += i18n_patterns('',
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
 
@@ -39,6 +39,8 @@ urlpatterns += patterns('',
     url("^$", direct_to_template, {"template": "index.html"}, name="home"),
     url("^eventos/", include("events.urls", namespace='events')),
     url("^grupos/", include("scout_group.urls")),
+    url("^institucional/", include("institutional.urls")),
+    url("^equipes/", include("mezzanine_people.urls")),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
@@ -77,8 +79,6 @@ urlpatterns += patterns('',
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
     url("^", include("mezzanine.urls")),
-    url("^institucional/", include("institutional.urls")),
-    url("^equipes/", include("mezzanine_people.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------

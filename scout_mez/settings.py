@@ -374,6 +374,16 @@ if os.path.exists(f):
     exec(open(f, "rb").read())
 
 
+# Configuracoes de email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  #Envia email real
+EMAIL_HOST = 'smtp.gmail.com'  #default='localhost'
+EMAIL_HOST_USER = 'roberzguerra2@gmail.com'
+EMAIL_HOST_PASSWORD = '54xrober'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Envia um email no console (terminal)
+#EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' #nao envia email (não faz nada)
+
 ####################
 # DYNAMIC SETTINGS #
 ####################
