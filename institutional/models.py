@@ -1,11 +1,23 @@
 # -*- coding:utf-8 -*-
-from django.shortcuts import get_object_or_404
+
+try:
+    from urllib import unquote
+except ImportError:  # assume python3
+    from urllib.parse import unquote
+from string import punctuation
 
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.sites.models import Site
+from django.shortcuts import get_object_or_404
 from django.db import models
+from django.contrib.sites.models import Site
 
+from mezzanine.core.fields import FileField
+from mezzanine.core.models import Orderable
 from mezzanine.pages.models import Page, RichText
 from mezzanine.blog.models import BlogPost
+from mezzanine.conf import register_setting
+
 from scout_group.models import ScoutGroup, District
 
 
@@ -13,14 +25,16 @@ class BlogPostExtend:
     """
     Alteracoes no model BlogPost
     """
+    #in_sitemap = models.BooleanField(_("Show in sitemap"), default=False)
+
     def publish_date_post(self):
         return self.publish_date.strftime("Publicado em %d/%m/%Y às %H:%M")
 
     def publish_date_post_list(self):
         return self.publish_date.strftime("%d/%m/%Y às %H:%M")
 
-BlogPost.__bases__ += (BlogPostExtend,)
 
+BlogPost.__bases__ += (BlogPostExtend,)
 
 class Team(Page, RichText):
     """
@@ -79,10 +93,93 @@ class ScoutGroupPage(Page, RichText):
         return District.objects.published().order_by('number')
 
 
-# class Homepage(Page):
-#     """
-#
-#     """
-#     class Meta:
-#         verbose_name = _(u"Homepage")
-#         verbose_name_plural = _(u"Homepages")
+class Slide(Orderable):
+    """
+    Slide para diversas paginas
+    """
+    page = models.ForeignKey(Page, null=True, help_text=_(u""))
+    image = FileField(_(u'Imagem'), max_length=255, upload_to='slides', format='Image', help_text=_(u"Envie imagens com resolução de 1920x718px     ou equivalente."))
+    description = models.CharField(_(u'Descrição'), blank=True, max_length=500, help_text=_(u"Descrição"))
+    url = models.CharField(_(u'URL'), blank=True, max_length=500, help_text=_(u"Cole aqui a URL de destino do link."))
+    #caption = models.CharField(_('Caption'), blank=True, max_length=500)
+    #site = models.ForeignKey(Site, default=1)
+
+    class Meta:
+        verbose_name = _(u'Slide')
+        verbose_name_plural = _(u'Slides')
+        ordering = ['_order']
+
+    def __unicode__(self):
+        return self.description
+
+    def save(self, *args, **kwargs):
+        """
+        If no description is given when created, create one from the
+        file name.
+        """
+        if not self.id and not self.description:
+            name = unquote(self.file.url).split('/')[-1].rsplit('.', 1)[0]
+            name = name.replace("'", '')
+            name = ''.join([c if c not in punctuation else ' ' for c in name])
+            # str.title() doesn't deal with unicode very well.
+            # http://bugs.python.org/issue6412
+            name = ''.join([s.upper() if i == 0 or name[i - 1] == ' ' else s
+                            for i, s in enumerate(name)])
+            self.description = name
+        super(Slide, self).save(*args, **kwargs)
+
+
+class HomePage(Page, RichText):
+    """
+    Modelo de Página inicial, para cadastrar paginas iniciais para os ramos, por exemplo.
+
+    """
+    #slides = models.ManyToManyField(verbose_name=_(u"Slides em Destaque"), to=Slide)
+
+    blog_posts = models.ManyToManyField(verbose_name=_(u"Notícias em Destaque"), to=BlogPost,
+                                        help_text=_(u"Notícias para exibir em destaque na página."))
+    teams = models.ManyToManyField(verbose_name=_(u"Equipes em Destaque"), to=Team,
+                                   help_text=_(u"Equipes em destaque para exibir na página."))
+
+
+class SocialLinks(Orderable):
+    """
+    Links para Redes Sociais
+    """
+
+    SOCIAL_LiNKS = {
+        '1': {
+            'name': _(u"Facebook"),
+            'css_class': 'facebook ir btn',
+        },
+        '2': {
+            'name': _(u"Youtube"),
+            'css_class': 'youtube ir btn',
+        },
+        '3': {
+            'name': _(u"Twitter"),
+            'css_class': 'twitter ir btn',
+        }
+    }
+
+    # ID, Name, ClassCSS
+    SOCIAL_LINKS_TYPE = (
+        ('1', SOCIAL_LiNKS['1']['name']),
+        ('2', SOCIAL_LiNKS['2']['name']),
+        ('3', SOCIAL_LiNKS['3']['name']),
+    )
+
+    type = models.CharField(_(u"Tipo"), choices=SOCIAL_LINKS_TYPE, max_length=1, blank=False)
+    url = models.URLField(_(u'Url'), blank=False, max_length=500, help_text=_(u"Link da Rede Social"))
+    page = models.ForeignKey(HomePage)
+
+    class Meta:
+        verbose_name = _(u'Link')
+        verbose_name_plural = _(u'Links')
+        ordering = ['type', 'url']
+
+    def __unicode__(self):
+        return self.url
+
+
+

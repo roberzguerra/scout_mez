@@ -64,8 +64,8 @@ class PersonCategory(Slugged):
     class Meta:
         verbose_name = _(u"Equipe")
         verbose_name_plural = _(u"Equipes")
+        ordering = ("title",)
 
     @models.permalink
     def get_absolute_url(self):
         return ("person_list_category", (), {"slug": self.slug})
-

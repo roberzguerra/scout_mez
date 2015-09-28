@@ -29,6 +29,7 @@ class PersonAdmin(DisplayableAdmin):
 
     fieldsets = person_fieldsets
     list_display = person_list_display
+    filter_horizontal = ("categories",)
 
     list_filter = ("categories","status",)
     inlines = [
@@ -44,14 +45,14 @@ class PersonCategoryAdmin(admin.ModelAdmin):
 
     fieldsets = ((None, {"fields": ("title",)}),)
 
-    def in_menu(self):
-        """
-        Hide from the admin menu unless explicitly set in ``ADMIN_MENU_ORDER``.
-        """
-        for (name, items) in settings.ADMIN_MENU_ORDER:
-            if "people.PersonCategory" in items:
-                return True
-        return False
+    # def in_menu(self):
+    #     """
+    #     Hide from the admin menu unless explicitly set in ``ADMIN_MENU_ORDER``.
+    #     """
+    #     for (name, items) in settings.ADMIN_MENU_ORDER:
+    #         if "people.PersonCategory" in items:
+    #             return True
+    #     return False
 
 
 admin.site.register(Person, PersonAdmin)
