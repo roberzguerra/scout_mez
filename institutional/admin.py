@@ -4,15 +4,15 @@ from copy import deepcopy
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django import forms
+from django.template.defaultfilters import slugify
 
 from mezzanine.conf import settings
 from mezzanine.blog.models import BlogPost
-from mezzanine.forms.admin import FormAdmin
-from mezzanine.galleries.admin import GalleryAdmin
 from mezzanine.pages.models import Page
-from mezzanine.core.admin import DisplayableAdminForm, DisplayableAdmin, TabularDynamicInlineAdmin
-from mezzanine.pages.admin import PageAdmin
+from mezzanine.core.admin import DisplayableAdminForm, TabularDynamicInlineAdmin
+from mezzanine.pages.admin import PageAdmin, PageAdminForm
 from mezzanine.blog.admin import BlogPostAdmin
+from mezzanine.utils.urls import unique_slug
 
 from models import Team, ScoutGroupPage, HomePage, Slide, SocialLinks
 from scout_core.admin import page_fieldsets
@@ -31,7 +31,7 @@ admin.site.unregister(BlogPost)
 admin.site.register(BlogPost, BlogPostAdmin)
 
 
-class PageAdminForm(DisplayableAdminForm):
+class PageAdminInstitutionalForm(PageAdminForm):
     """
     Form customizado para Paginas do Site
 
@@ -40,7 +40,7 @@ class PageAdminForm(DisplayableAdminForm):
     in_sitemap = forms.BooleanField(label=_(u"Show in sitemap"), required=False, initial=False)
 
 
-PageAdmin.form = PageAdminForm
+PageAdmin.form = PageAdminInstitutionalForm
 admin.site.unregister(Page)
 admin.site.register(Page, PageAdmin)
 
@@ -59,7 +59,7 @@ class HomePageAdmin(PageAdmin):
     filter_horizontal = ("blog_posts", "teams", )
     inlines = [SlideInline, SocialLinkInline, ]
 
-admin.site.register(HomePage, HomePageAdmin)
+
 # admin_classes_with_slides = [HomePageAdmin, ] #FormAdmin, GalleryAdmin]
 # for admin_class in admin_classes_with_slides:
 #     setattr(admin_class, 'inlines', list(admin_class.inlines) + [SlideInline])
@@ -97,5 +97,6 @@ class ScoutGroupPageAdmin(PageAdmin):
     fieldsets = scout_core_page_fields
 
 
+admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(ScoutGroupPage, ScoutGroupPageAdmin)

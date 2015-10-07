@@ -88,6 +88,8 @@ BLOG_POST_PER_PAGE = 6
 
 SEARCH_MODEL_CHOICES = ('pages.Page', 'blog.BlogPost')
 
+# Metodo padrao utilizado na geracao das URLs slugs
+SLUGIFY = 'django.template.defaultfilters.slugify'
 
 ########################
 # MAIN DJANGO SETTINGS #

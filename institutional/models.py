@@ -141,6 +141,10 @@ class HomePage(Page, RichText):
     teams = models.ManyToManyField(verbose_name=_(u"Equipes em Destaque"), to=Team,
                                    help_text=_(u"Equipes em destaque para exibir na página."))
 
+    class Meta:
+        verbose_name = _(u'Página Inicial')
+        verbose_name_plural = _(u'Páginas Iniciais')
+
 
 class SocialLinks(Orderable):
     """
@@ -181,5 +185,6 @@ class SocialLinks(Orderable):
     def __unicode__(self):
         return self.url
 
-
+    def get_type(self):
+        return self.SOCIAL_LiNKS.get(self.type)
 

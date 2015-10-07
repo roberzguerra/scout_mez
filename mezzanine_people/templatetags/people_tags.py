@@ -1,6 +1,6 @@
 from django.db.models import Count
 
-from .models import Person, PersonCategory
+from mezzanine_people.models import Person, PersonCategory
 from mezzanine import template
 
 

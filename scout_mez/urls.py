@@ -36,7 +36,8 @@ urlpatterns += i18n_patterns('',
     # one homepage pattern, so if you use a different one, comment this
     # one out.
 
-    url("^$", direct_to_template, {"template": "index.html"}, name="home"),
+    #url("^$", direct_to_template, {"template": "index.html"}, name="home"),
+    url("^$", "institutional.views.homepage", name="home"),
     url("^eventos/", include("events.urls", namespace='events')),
     url("^grupos/", include("scout_group.urls")),
     url("^institucional/", include("institutional.urls")),

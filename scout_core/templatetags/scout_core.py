@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from django.template.loader import get_template
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django import template
@@ -26,4 +27,3 @@ def crop_text(text, value):
         result = u"%s..." % result[:value]
 
     return result
-
