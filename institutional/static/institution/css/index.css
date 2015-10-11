@@ -1646,7 +1646,6 @@ header {
     position: absolute;
     bottom: -100px;
     left: 0;
-    z-index: 110;
 }
 
 .nav-slider span {
@@ -1668,12 +1667,23 @@ header {
 
 .nav-slider span.prev {
     background-position: -2px -126px;
+    z-index: 110;
 }
 
 .nav-slider span.next {
     background-position: -55px -126px;
     left: auto;
     right: 10px;
+    z-index: 110;
+}
+
+.slider .link {
+    text-decoration: none;
+    color: #FFF;
+    text-shadow: 1px 1px 2px #000, 0 0 4px #000, 0 0 8px #000;
+}
+.slider .link:hover {
+    text-decoration: underline;
 }
 
 @media screen and (min-width: 47.5em) {

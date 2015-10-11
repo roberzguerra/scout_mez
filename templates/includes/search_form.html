@@ -1,7 +1,7 @@
 {% load mezzanine_tags i18n future %}
 
 <form action="{% url "search" %}" class="search clearfix" role="search">
-    <input type="text" name="q" class="watermark" title="Busca por palavra-chave" placeholder="Busca por palavra-chave"/>
+    <input type="text" name="q" class="watermark" title="Busca por palavra-chave" placeholder="Busca por palavra-chave" value="{{ request.GET.q }}"/>
     <input type="submit" name="submitsearch" class="btn ir">
 
     {% if search_model_choices %}
