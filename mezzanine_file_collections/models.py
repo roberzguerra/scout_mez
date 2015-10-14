@@ -23,7 +23,7 @@ class MediaLibrary(Page, RichText):
 class MediaFile(Orderable):
     """Single file to add in a library."""
 
-    library = models.ForeignKey("MediaLibrary", related_name="files")
+    library = models.ForeignKey(MediaLibrary, related_name="files")
     file = FileField(_("File"), max_length=200,
             upload_to=upload_to("galleries.GalleryImage.file", "downloads"))
     title = models.CharField(_("Title"), max_length=50, blank=True)
