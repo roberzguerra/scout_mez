@@ -191,11 +191,11 @@
                                 {% endfor %}
                             </ul>
                             <span class="prev-store btn ir"></span>
-
                             <div class="carrousel-products">
                             </div>
                         </div>
-                        <a href="javascript:void(0);" class="btn-store btn-style"><span>Conheça a equipe</span><i class="arrow"></i></a>
+
+                        <a href="{{ category.get_first_page_url }}" class="btn-store btn-style"><span>Conheça a equipe</span><i class="arrow"></i></a>
                     {% endfor %}
                 {% endif %}
 

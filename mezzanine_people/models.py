@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from django.core.urlresolvers import reverse
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -71,4 +72,10 @@ class PersonCategory(Slugged):
 
     @models.permalink
     def get_absolute_url(self):
-        return ("person_list_category", (), {"slug": self.slug})
+        return ("person_list_category", (), {"category": self.slug})
+
+    def get_first_page_url(self):
+        if self.people_category.count() > 0:
+            return self.people_category.first().get_absolute_url()
+        return '#'
+
