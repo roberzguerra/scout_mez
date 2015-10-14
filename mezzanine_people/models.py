@@ -39,6 +39,9 @@ class Person(Displayable, RichText, AdminThumbMixin):
     def full_name(self):
         return u'%s %s' % (self.first_name, self.last_name)
 
+    def get_job_full_name(self):
+        return u"%s - %s" % (self.job_title, self.full_name)
+
     @models.permalink
     def get_absolute_url(self):
         return ("person_detail", (), {"slug": self.slug})

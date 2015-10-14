@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from mezzanine.utils.models import upload_to
+from mezzanine_people.models import PersonCategory
 
 try:
     from urllib import unquote
@@ -102,12 +103,19 @@ class Slide(Orderable):
     """
     Slide para diversas paginas
     """
-    page = models.ForeignKey(Page, null=True, help_text=_(u""))
-    image = FileField(_(u'Imagem'), max_length=255, upload_to='slides', format='Image', help_text=_(u"Envie imagens com resolução de 1920x718px ou equivalente."))
+    URL_ACCESS_DEFAULT = 1 # Abre na mesma Janela
+    URL_ACCESS_NEW = 2 # Abre em nova Janela
+    URL_ACCESS = (
+        ('1', _(u"Mesma Janela/Aba")),
+        ('2', _(u"Nova Janela/Aba")),
+    )
+
+    image = FileField(_(u'Imagem 1920x718px'), max_length=255, upload_to='slides', format='Image', help_text=_(u"Envie imagens com resolução de 1920x718px ou equivalente."))
     description = models.CharField(_(u'Descrição'), blank=True, max_length=500, help_text=_(u"Descrição"))
     url = models.CharField(_(u'URL'), blank=True, max_length=500, help_text=_(u"Cole aqui a URL de destino do link."))
-    #caption = models.CharField(_('Caption'), blank=True, max_length=500)
-    #site = models.ForeignKey(Site, default=1)
+    url_access = models.CharField(u'Tipo de Acesso', choices=URL_ACCESS, max_length=1, blank=False,
+        help_text=_(u"Tipo de acesso à URL."))
+    page = models.ForeignKey(Page, null=True, help_text=_(u""))
 
     class Meta:
         verbose_name = _(u'Slide')
@@ -116,6 +124,12 @@ class Slide(Orderable):
 
     def __unicode__(self):
         return self.description
+
+    def get_url_access_html(self):
+        html = ''
+        if self.url_access == self.URL_ACCESS_NEW:
+            html = 'target="_blank"'
+        return html
 
     def save(self, *args, **kwargs):
         """
@@ -141,9 +155,9 @@ class HomePage(Page, RichText):
     """
     #slides = models.ManyToManyField(verbose_name=_(u"Slides em Destaque"), to=Slide)
 
-    blog_posts = models.ManyToManyField(verbose_name=_(u"Notícias em Destaque"), to=BlogPost,
-                                        help_text=_(u"Notícias para exibir em destaque na página."))
-    teams = models.ManyToManyField(verbose_name=_(u"Equipes em Destaque"), to=Team,
+    blog_posts = models.ManyToManyField(verbose_name=_(u"Notícias em Destaque"), to=BlogPost, null=True, blank=True,
+                                        help_text=_(u"Notícias para exibir em destaque na página."),)
+    teams = models.ManyToManyField(verbose_name=_(u"Equipes em Destaque"), to=PersonCategory, null=True, blank=True,
                                    help_text=_(u"Equipes em destaque para exibir na página."))
 
     class Meta:

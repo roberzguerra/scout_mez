@@ -76,7 +76,6 @@ class HomePageAdmin(PageAdmin):
 #     setattr(admin_class, 'inlines', list(admin_class.inlines) + [SlideInline])
 
 
-
 team_fields = deepcopy(page_fieldsets)
 team_fields[0][1]["fields"].insert(5, u"categories")
 
