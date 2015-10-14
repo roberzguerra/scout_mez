@@ -39,8 +39,6 @@
     </li>
     {% elif blog_post %}
         <li id="breadcrumb-menu-post-list"><a href="{% url 'blog_post_list' %}">{% trans 'Notícias' %} </a></li>
-    {% elif not request.GET.q %}
-        <li id="breadcrumb-menu-post-list" class="active">{% trans 'Notícias' %}</li>
     {% endif %}
 
 {% endblock %}
