@@ -5,14 +5,16 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django import forms
 from django.template.defaultfilters import slugify
+from filebrowser_safe.fields import FileBrowseFormField, FileBrowseWidget, FileBrowseField
 
 from mezzanine.conf import settings
 from mezzanine.blog.models import BlogPost
+from mezzanine.forms import fields
 from mezzanine.pages.models import Page
 from mezzanine.core.admin import DisplayableAdminForm, TabularDynamicInlineAdmin
 from mezzanine.pages.admin import PageAdmin, PageAdminForm
-from mezzanine.blog.admin import BlogPostAdmin
-from mezzanine.utils.urls import unique_slug
+from mezzanine.blog.admin import BlogPostAdmin, blogpost_fieldsets
+from mezzanine.utils.models import upload_to
 
 from models import Team, ScoutGroupPage, HomePage, Slide, SocialLinks
 from scout_core.admin import page_fieldsets
@@ -24,7 +26,16 @@ class BlogPostAdminForm(DisplayableAdminForm):
 
     Seta o atributo "Exibir no sitemap" como False e não obrigatorio
     """
+
     in_sitemap = forms.BooleanField(label=_(u"Show in sitemap"), required=False, initial=False)
+
+    def __init__(self, *args, **kwargs):
+        super(BlogPostAdminForm, self).__init__(*args, **kwargs)
+        self.fields['featured_image'].label = _(u"Imagem destaque")
+        self.fields['featured_image'].help_text = _(u"Imagem destaque da notícia, resolução mínima 460x260px ou proporcional.")
+        self.fields['image_top'].directory = upload_to("blog.BlogPost.featured_image", "blog")
+
+blogpost_fieldsets[0][1]["fields"].insert(4, "image_top")
 
 BlogPostAdmin.form = BlogPostAdminForm
 admin.site.unregister(BlogPost)

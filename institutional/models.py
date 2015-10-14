@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from mezzanine.utils.models import upload_to
 
 try:
     from urllib import unquote
@@ -27,14 +28,18 @@ class BlogPostExtend:
     """
     #in_sitemap = models.BooleanField(_("Show in sitemap"), default=False)
 
+    # image_middle = FileField(verbose_name=_("Imagem destaque centro"),
+    #     upload_to=upload_to("blog.BlogPost.featured_image", "blog"),
+    #     format="Image", max_length=255, null=True, blank=True,
+    #     help_text=_(u"Imagem do centro da página, resolução mínima de 460x260px."))
+
     def publish_date_post(self):
         return self.publish_date.strftime("Publicado em %d/%m/%Y às %H:%M")
 
     def publish_date_post_list(self):
         return self.publish_date.strftime("%d/%m/%Y às %H:%M")
-
-
 BlogPost.__bases__ += (BlogPostExtend,)
+
 
 class Team(Page, RichText):
     """
@@ -98,7 +103,7 @@ class Slide(Orderable):
     Slide para diversas paginas
     """
     page = models.ForeignKey(Page, null=True, help_text=_(u""))
-    image = FileField(_(u'Imagem'), max_length=255, upload_to='slides', format='Image', help_text=_(u"Envie imagens com resolução de 1920x718px     ou equivalente."))
+    image = FileField(_(u'Imagem'), max_length=255, upload_to='slides', format='Image', help_text=_(u"Envie imagens com resolução de 1920x718px ou equivalente."))
     description = models.CharField(_(u'Descrição'), blank=True, max_length=500, help_text=_(u"Descrição"))
     url = models.CharField(_(u'URL'), blank=True, max_length=500, help_text=_(u"Cole aqui a URL de destino do link."))
     #caption = models.CharField(_('Caption'), blank=True, max_length=500)

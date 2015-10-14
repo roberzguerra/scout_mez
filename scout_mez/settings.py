@@ -69,13 +69,34 @@ EXTRA_MODEL_FIELDS = (
     #     {"blank": True, "upload_to": "blog"},
     # ),
     # Example of adding a field to *all* of Mezzanine's content types:
+
+    # Add Field Page
     (
         "mezzanine.pages.models.Page.image",
-        "mezzanine.core.fields.FileField", # 'django.db.models.' is implied if path is omitted.
-        (_(u"Imagem de Destaque"),),
-        {'format': "Image", 'max_length': 255, 'blank':True, 'help_text': u"Proporção 1920x300px."},
+        "mezzanine.core.fields.FileBrowseField", # 'django.db.models.' is implied if path is omitted.
+        (_(u"Imagem Destaque"),),
+        {'format': "Image", 'max_length': 255, 'blank': True, 'help_text': u"Proporção 1920x300px."},
+    ),
+    (
+        # Add Fields BlogPost
+        "mezzanine.blog.models.BlogPost.image_top",
+        "mezzanine.core.fields.FileBrowseField",
+        (_(u"Imagem destaque topo"),),
+        {
+            'directory': "blog",
+            'format': "Image", 'max_length': 255, 'null': True, 'blank': True,
+            'help_text': _(u"Imagem do topo da notícia, resolução mínima 1920x300px ou proporcional.")
+        },
+
     ),
 )
+
+MIGRATION_MODULES = {
+    "pages": "scout_core.migrations.pages_migration",
+    "blog": "scout_core.migrations.blog_migration",
+    #"forms": "path.to.migration.storage.forms_migration",
+    #"galleries": "path.to.migration.storage.galleries_migration",
+}
 
 # If True, the django-modeltranslation will be added to the
 # INSTALLED_APPS setting.

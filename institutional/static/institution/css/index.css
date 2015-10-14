@@ -4083,6 +4083,18 @@ footer a.phone span {
   }
 }
 
+#main .notice .img-responsive {
+    width: 460px;
+    margin: 0 auto 1rem auto;
+    display: block;
+}
+
+@media screen and (max-width: 32em) {
+   #main .notice .img-responsive {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 28.125em) {
   #slideshow,
   #loading {

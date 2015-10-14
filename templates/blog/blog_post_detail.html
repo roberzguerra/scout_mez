@@ -14,11 +14,14 @@
 
 {% block page_banner %}
     <div class="inner-banner">
-    {% block blog_post_detail_featured_image %}
-        {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
-            <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 1920 300 %}">
+    {% block blog_post_detail_image_top %}
+        {% if blog_post.image_top %}
+            <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.image_top 1920 300 %}">
         {% else %}
+            {% comment %}
             <img class="img-responsive" src="http://placehold.it/1920x300" alt="Banner">
+            {% endcomment %}
+            <div class="banner-default"></div>
         {% endif %}
     {% endblock %}
     </div>
@@ -50,6 +53,12 @@
             </p>
 
             <div class="text">
+                {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+                    <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 460 260 %}">
+                {% else %}
+                    <img class="img-responsive" src="http://placehold.it/460x260" alt="Notícias">
+                {% endif %}
+
                 {% block blog_post_detail_content %}
                     {% editable blog_post.content %}
                         {{ blog_post.content|richtext_filters|safe }}
