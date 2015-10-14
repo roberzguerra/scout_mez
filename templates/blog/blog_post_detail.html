@@ -55,8 +55,6 @@
             <div class="text">
                 {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
                     <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 460 260 %}">
-                {% else %}
-                    <img class="img-responsive" src="http://placehold.it/460x260" alt="Notícias">
                 {% endif %}
 
                 {% block blog_post_detail_content %}
