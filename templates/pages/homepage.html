@@ -182,7 +182,7 @@
                                     {% cycle '<li>' '' %}
                                         <a href="javascript:void(0);" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}" class="{% cycle '' 'last' as css_class %}">
                                             {% if person.mugshot %}
-                                                <img src="{{ MEDIA_URL }}{% thumbnail person.mugshot 182 182 %}" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}">
+                                                <img src="{{ MEDIA_URL }}{% thumbnail person.mugshot 140 140 %}" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}">
                                             {% else %}
                                                 <img class="equipe-photo" src="{{ STATIC_URL }}institution/img/img-02.jpg" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}">
                                             {% endif %}
