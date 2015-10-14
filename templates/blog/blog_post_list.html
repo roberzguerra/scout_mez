@@ -23,7 +23,6 @@
 {% block breadcrumb_menu %}
     {{ block.super }}
     {% if tag or category or year or month or author %}
-    <li id="breadcrumb-menu-post-list"><a href="{% url 'blog_post_list' %}">{% trans 'Notícias' %} </a></li>
     <li id="breadcrumb-menu-{{ blog_post.id }}" class="active">
         {% spaceless %}
         {% if tag %}
