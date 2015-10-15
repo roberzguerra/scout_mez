@@ -4963,12 +4963,12 @@ footer a.phone span {
 
 .page-download .folder-list li {
     list-style: none;
-    width: auto;
     float: left;
     margin: 1rem;
-    /* border: 1px solid #000; */
     text-align: center;
-    max-width: 200px;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
 }
 .page-download .folder-list .link {
     color: #004a8d;
@@ -4988,6 +4988,7 @@ footer a.phone span {
 .page-download .folder-list .fa-file,
  .page-download .folder-list .media-object {
     display: block;
+    margin: 0 auto;
 }
 
 /* PAGINA DOWNLOADS FIM ######################################################## */
