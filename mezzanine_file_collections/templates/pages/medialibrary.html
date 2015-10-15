@@ -27,7 +27,7 @@
                    alt="{{ child.title }}"
                    title="{{ child.title }}">
                 <i class="fa fa-folder"></i>
-                <p>{{ child.title }}</p>
+                <p>{{ child.title }} ({{ child.medialibrary.files.count }})</p>
             </a>
             </li>
         {% endfor %}
