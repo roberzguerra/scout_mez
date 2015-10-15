@@ -4786,6 +4786,11 @@ footer a.phone span {
   }
 }
 
+.lista-distritos .content-img img {
+    width: 182px;
+    height: 182px;
+}
+
 .lista-distritos .btn-load-district {
   padding: 18px 12%;
   margin-top: 60px;

@@ -2,7 +2,7 @@
 
 <a href="" title="{{ scout_group }}" class="content-img">
     {% if scout_group.logo %}
-        <img src="{{ MEDIA_URL }}{% thumbnail scout_group.logo 182 182 %}" alt="{{ scout_group }}" title="{{ scout_group }}">
+        <img class="scout-group-logo" src="{{ MEDIA_URL }}{% thumbnail scout_group.logo 182 182 %}" alt="{{ scout_group }}" title="{{ scout_group }}">
     {% else %}
         <img src="{{ STATIC_URL }}institution/img/img-02.jpg" alt="{{ scout_group }}" title="{{ scout_group }}">
     {% endif %}
