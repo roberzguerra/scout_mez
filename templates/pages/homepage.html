@@ -178,7 +178,7 @@
                         <div class="list-products equipe-homepage">
                             <span class="next-store btn ir"></span>
                             <ul class="products clearfix">
-                                {% for person in category.people.all %}
+                                {% for person in category.get_people_by_updated_at %}
                                     {% cycle '<li>' '' %}
                                         <a href="javascript:void(0);" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}" class="{% cycle '' 'last' as css_class %}">
                                             {% if person.mugshot %}

@@ -79,3 +79,6 @@ class PersonCategory(Slugged):
             return self.people_category.first().get_absolute_url()
         return '#'
 
+    def get_people_by_updated_at(self):
+        return self.people.order_by('-updated').all()
+
