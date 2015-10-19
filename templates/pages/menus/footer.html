@@ -1,16 +1,13 @@
 {% load i18n pages_tags %}
 
 {% spaceless %}
-
 {% if page_branch_in_menu %}
     <div class="nav-footer">
         <ul class="list-menu">
         {% for page in page_branch %}
-
-            {% if page.in_menu %}
+            {% if '2' in page.in_menus %}
                 <li><a href="{{ page.get_absolute_url }}" class="link">{{ page.title }}</a></li>
             {% endif %}
-
         {% endfor %}
         </ul>
     </div>
