@@ -22,11 +22,17 @@
 {% block content_main %}
     {% spaceless %}
         {% block page_banner %}
-            {% page_menu "includes/page_banner.html" %}
+            {% include "includes/page_banner.html" %}
         {% endblock page_banner %}
     {% endspaceless %}
 
     <div class="center">
+        {% block pages_children %}
+            <div class="page-menu">
+                {% page_menu page %}
+            </div>
+        {% endblock pages_children %}
+        {% comment %}
         {% block pages_children %}
             {% if page.children.count > 0 %}
                 <div class="page-menu">
@@ -41,7 +47,7 @@
                 </div>
             {% endif %}
         {% endblock pages_children %}
-
+    {% endcomment %}
         {% spaceless %}
             <div class="migalha clearfix">
                 <ul class="section">
