@@ -116,53 +116,43 @@
         <div class="informations">
             <img class="img-head" src="/static/institution/img/img-head.png" alt="Chapéu"/>
 
+
             <div class="center clearfix">
-                <div class="news box">
-                    <div class="top">
-                        <h2 class="titles-bgs">Transparência</h2>
-
-                        <div class="pag-news"></div>
-                    </div>
-                    <ul class="list-news">
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="http://placehold.it/460x260" alt="Notícias">
-                            </a>
-
-                            <div class="text">
-                                <div class="aux">
-                                    <p>
-                                        Últimos avisos sobre o Congresso Escoteiro Regional
-                                    </p>
-                                </div>
-                            </div>
-                            <a href="javascript:void(0);" class="detail btn-style"><span>VER LISTA DE ARQUIVOS</span><i
-                                    class="arrow btn"></i></a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="find box">
-
-                    <div class="top">
-                        <h2 class="titles-bgs">Campo Escola</h2>
-                    </div>
-
-                    <div>
-                        <img src="http://placehold.it/460x260" alt="Grupo">
-
-                        <div class="text">
-                            <div class="aux">
-                                <p>
-                                    Veja a lista de Grupos Escoteiros em atividade
-                                    no Rio Grande do Sul e escolha o mais perto de você!
-                                </p>
-                            </div>
+                {% for blog_post in page.homepage.blog_posts.all %}
+                    <div class="news box">
+                        <div class="top">
+                            <h2 class="titles-bgs">
+                                {% if blog_post.get_category_first %}
+                                    {{ blog_post.get_category_first }}
+                                {% else %}
+                                    Destaque
+                                {% endif %}
+                            </h2>
+                            <div class="pag-news"></div>
                         </div>
-                        <a href="javascript:void(0);" class="detail btn-style"><span>CONHEÇA O LUGAR</span><i
-                                class="arrow btn"></i></a>
+                        <ul class="list-news">
+                            <li>
+                                <a href="{{ blog_post.get_absolute_url }}">
+                                    {% if blog_post.featured_image %}
+                                        <img class="img-responsive" alt="{{ blog_post }}" title="{{ blog_post }}" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 460 260 %}">
+                                    {% else %}
+                                        <img class="img-responsive" alt="{{ blog_post }}" title="{{ blog_post }}" src="http://placehold.it/460x260" alt="Notícias">
+                                    {% endif %}
+                                </a>
+
+                                <div class="text">
+                                    <div class="aux">
+                                        <p>
+                                            {{ blog_post }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <a href="{{ blog_post.get_absolute_url }}" class="detail btn-style"><span>VER DETALHE DA NOTÍCIA</span><i
+                                        class="arrow btn"></i></a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
 

@@ -39,6 +39,11 @@ class BlogPostExtend:
 
     def publish_date_post_list(self):
         return self.publish_date.strftime("%d/%m/%Y às %H:%M")
+
+    def get_category_first(self):
+        return self.categories.first()
+
+
 BlogPost.__bases__ += (BlogPostExtend,)
 
 

@@ -104,9 +104,9 @@
                 <li class="{% cycle '' 'last' %}">
                     <a href="{{ blog_post.get_absolute_url }}">
                         {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
-                            <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 460 260 %}">
+                            <img class="img-responsive" alt="{{ blog_post }}" title="{{ blog_post }}" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 460 260 %}">
                         {% else %}
-                            <img class="img-responsive" src="http://placehold.it/460x260" alt="Notícias">
+                            <img class="img-responsive" alt="{{ blog_post }}" title="{{ blog_post }}" src="http://placehold.it/460x260" alt="Notícias">
                         {% endif %}
 
                     {# <img class="img-responsive" src="http://placehold.it/460x260" alt="Notícias"> #}

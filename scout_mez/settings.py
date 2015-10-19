@@ -17,7 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Controls the ordering and grouping of the admin menu.
 ADMIN_MENU_ORDER = (
-    ("Content", ("pages.Page", "blog.BlogPost", "blog.BlogCategory",
+    ("Content", ("pages.Page", ("Notícias", "blog.BlogPost"), "blog.BlogCategory",
        "generic.ThreadedComment", ("Biblioteca de Mídia", "fb_browse"),)),
     ("Equipes", ("mezzanine_people.Person", "mezzanine_people.PersonCategory")),
     ("Grupos | Distritos", ("scout_group.District", "scout_group.ScoutGroup")), #"scout_group.ScoutGroup"
