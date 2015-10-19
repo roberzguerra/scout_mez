@@ -12,15 +12,17 @@
 {{ blog_post.description }}
 {% endmetablock %}{% endblock %}
 
+{# Facebook #}
+{% block social_title %}{{ blog_post.title }}{% endblock %}
+{% block social_image %}{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ MEDIA_URL }}{{ blog_post.featured_image }}{% endblock social_image %}">
+{% block social_description %}{{ blog_post.description }}{% endblock social_description %}
+
 {% block page_banner %}
     <div class="inner-banner">
     {% block blog_post_detail_image_top %}
         {% if blog_post.image_top %}
             <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.image_top 1920 300 %}">
         {% else %}
-            {% comment %}
-            <img class="img-responsive" src="http://placehold.it/1920x300" alt="Banner">
-            {% endcomment %}
             <div class="banner-default"></div>
         {% endif %}
     {% endblock %}

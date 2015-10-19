@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from mezzanine.conf import settings
 from mezzanine.core.fields import RichTextField, FileField
-from mezzanine.core.models import Displayable, RichText, Slugged
+from mezzanine.core.models import Displayable, RichText, Slugged, Orderable
 from mezzanine.pages.models import Page
 from mezzanine.utils.models import AdminThumbMixin
 
@@ -15,13 +15,12 @@ class Person(Displayable, RichText, AdminThumbMixin):
     """
     A person.
     """
-
     categories = models.ManyToManyField("PersonCategory", verbose_name=_(u"Equipes"), blank=True,
-        related_name="people")
+        related_name="people", ) #through="PeoplePersonCategory"
     first_name = models.CharField(_(u"Primeiro Nome"), blank=True, max_length=100)
     last_name = models.CharField(_(u"Último Nome"), blank=True, max_length=100)
     mugshot = FileField(verbose_name=_(u"Imagem de Perfil"), upload_to="people", format="Image", max_length=255,
-        null=True, blank=True)
+        null=True, blank=True, help_text=_(u"Evie imagens com 182x182px."))
     mugshot_credit = models.CharField(_(u"Imagem de Perfil (credit)"), blank=True, max_length=200)
     email = models.EmailField(_(u"E-mail"), blank=True)
     bio = RichTextField(_(u"Biografia"), help_text=_(u"Breve biografia da pessoa e/ou cargo."), default="", blank=True)
@@ -82,3 +81,13 @@ class PersonCategory(Slugged):
     def get_people_by_updated_at(self):
         return self.people.order_by('-updated').all()
 
+
+# class PeoplePersonCategory(Orderable):
+#     person = models.ForeignKey(to=Person)
+#     person_category = models.ForeignKey(to=PersonCategory)
+#
+#     class Meta:
+#         verbose_name = _(u"Pessoa da Equipe")
+#         verbose_name_plural = _(u"Pessoas de Equipes")
+#         #db_table = 'mezzanine_people_person_categories'
+#         #db_table = 'mezzanine_people_per_categories'

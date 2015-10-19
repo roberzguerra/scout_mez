@@ -20,6 +20,9 @@
 {{ page.description }}
 {% endmetablock %}{% endblock %}
 
+{% block pages_children %}
+{% endblock pages_children %}
+
 {% block breadcrumb_menu %}
     {{ block.super }}
     {% if tag or category or year or month or author %}

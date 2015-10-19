@@ -5,11 +5,10 @@ from django.contrib import admin
 
 from .models import Person, PersonLink, PersonCategory
 from mezzanine.conf import settings
-from mezzanine.core.admin import DisplayableAdmin
-
+from mezzanine.core.admin import DisplayableAdmin, TabularDynamicInlineAdmin
 
 person_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
-person_fieldsets[0][1]["fields"].insert(1, "categories")
+#person_fieldsets[0][1]["fields"].insert(1, "categories")
 person_list_display = ["title", "status", "admin_link"]
 person_fieldsets[0][1]["fields"].extend(["first_name", "last_name", "job_title",
                                          "mugshot", "mugshot_credit", "bio", "email",
@@ -31,10 +30,14 @@ class PersonAdmin(DisplayableAdmin):
     list_display = person_list_display
     filter_horizontal = ("categories",)
 
-    list_filter = ("categories","status",)
+    list_filter = ("categories", "status",)
     inlines = [
         PersonLinkInline,
     ]
+
+
+# class PersonCategoryAdminInline(TabularDynamicInlineAdmin):
+#     model = Person.categories.through
 
 
 class PersonCategoryAdmin(admin.ModelAdmin):
@@ -44,6 +47,7 @@ class PersonCategoryAdmin(admin.ModelAdmin):
     """
 
     fieldsets = ((None, {"fields": ("title",)}),)
+    # inlines = (PersonCategoryAdminInline,)
 
     # def in_menu(self):
     #     """
