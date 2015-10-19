@@ -1,6 +1,10 @@
 {% extends "pages/page.html" %}
-
 {% load mezzanine_tags i18n %}
+
+{% block head_begin %}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">#}
+    <link rel="stylesheet" href="{{ STATIC_URL }}institution/css/bootstrap.min.css">
+{% endblock head_begin %}
 
 {% block main %}
 
@@ -37,7 +41,6 @@
 
 {% block extra_js %}
 {{ block.super }}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script>
 $(function() {$('.mezzanine-form :input:visible:enabled:first').focus();});
 </script>
