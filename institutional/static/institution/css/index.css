@@ -1194,7 +1194,7 @@ header {
 
 
 .menu.open .main-menu {
-    max-height: 166px;
+    max-height: 500px;
 }
 
 .menu.mHeight .main-menu {
@@ -1316,7 +1316,7 @@ header {
 
     .menu {
         height: 100px;
-        padding: 0 42px;
+        padding: 0 10px;
         position: relative;
     }
 
@@ -2748,15 +2748,21 @@ footer a.phone span {
     display: block;
     width: 140px;
     height: 46px;
-    background: url("../img/fundation.png") no-repeat 0 -205px;
-    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    background: url("../img/logos_footer.png") no-repeat 0 -205px;
 }
 
 .fundation .brand.br {
     background-position: 0 -155px;
     height: 40px;
     margin-top: 2.5px;
-    float: left;
+}
+
+.fundation .brand.apoio-getup {
+    height: 48px;
+    background-position: 0 -342px;
+    float: none;
 }
 
 .developer {
@@ -2825,6 +2831,13 @@ footer a.phone span {
         background-position: 0 0;
         height: 62px;
         margin: 0 0 10px;
+    }
+
+    .fundation .brand.apoio-getup {
+        height: 73px;
+        width: 100%;
+        background-position: 0 -261px;
+        float: none;
     }
 }
 
@@ -3013,21 +3026,6 @@ footer a.phone span {
 .fundation .logos {
     /*padding-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.3);*/
-}
-
-.fundation .brand {
-    display: block;
-    width: 140px;
-    height: 46px;
-    background: url("../img/fundation.png") no-repeat 0 -205px;
-    float: right;
-}
-
-.fundation .brand.br {
-    background-position: 0 -155px;
-    height: 40px;
-    margin-top: 2.5px;
-    float: left;
 }
 
 .developer {
@@ -5063,3 +5061,36 @@ footer a.phone span {
 }
 /* SUBMENUS EM PAGES FIM ####################################################################### */
 
+/* INICIO FORMULARIOS ########################################################################## */
+
+.block-form {
+    margin: 2rem 0 2rem 0;
+}
+
+.block-form .form-group input {
+        font-size: 1em;
+    line-height: 21px;
+    color: #999 !important;
+    background-color: #FFF;
+    width: 100%;
+    height: 40px;
+    border: 2px solid #CCC;
+    padding: 0 8px;
+    /* float: left; */
+    border-radius: 10px;
+}
+
+.block-form .form-group textarea {
+    font-size: 1em;
+    line-height: 21px;
+    color: #999 !important;
+    background-color: #FFF;
+    width: 100%;
+    height: 180px;
+    border: 2px solid #CCC;
+    padding: 0 8px;
+    /* float: left; */
+    border-radius: 10px;
+}
+
+/* FIM FORMULARIOS ########################################################################## */
