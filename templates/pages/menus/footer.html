@@ -1,6 +1,22 @@
 {% load i18n pages_tags %}
 
 {% spaceless %}
+
+{% if page_branch_in_menu %}
+    <div class="nav-footer">
+        <ul class="list-menu">
+        {% for page in page_branch %}
+
+            {% if page.in_menu %}
+                <li><a href="{{ page.get_absolute_url }}" class="link">{{ page.title }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% comment %}
 {% if page_branch_in_menu %}
 
 {% for page in page_branch %}
@@ -9,17 +25,17 @@
             <div class="nav-footer">
         {% endif %}
         {% if page.in_menu %}
-            <ul class="list-unstyled">
+            <ul class="list-menu">
         {% endif %}
     {% endif %}
 
     {% if page.in_menu %}
         {% if forloop.first and not page.parent.in_menu and not page.is_primary %}
-            <ul class="list-unstyled">
+            <ul class="list-menu">
         {% endif %}
         <li {% if page.is_current_or_ascendant %}class="active"{% endif %}
             id="footer-menu-{{ page.html_id }}">
-            <a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+            <a href="{{ page.get_absolute_url }}" class="link">{{ page.title }}</a></li>
     {% endif %}
 
     {% if page.in_menu and page.has_children_in_menu %}{% page_menu page %}{% endif %}
@@ -42,4 +58,5 @@
 {% endfor %}
 
 {% endif %}
+{% endcomment %}
 {% endspaceless %}
