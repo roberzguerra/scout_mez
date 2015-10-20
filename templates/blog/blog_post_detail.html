@@ -43,7 +43,7 @@
     {# CONTEUDO ########################################################### #}
         <div class="notice">
             {% if blog_post.description and blog_post.description != blog_post.title %}
-                <strong>{{ blog_post.description|safe }}</strong>
+                <strong class="description-notice">{{ blog_post.description|safe }}</strong>
             {% endif %}
 {#            <p class="date">{% blocktrans with sometime=blog_post.publish_date|date:'d/m/Y \à\s H:i ' %}Publicado em {{ sometime }}{% endblocktrans %}</p>#}
             <p class="date">

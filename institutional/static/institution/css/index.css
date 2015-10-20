@@ -4463,6 +4463,8 @@ footer .nav-footer .list-menu .link:hover {
 
   #main .notice strong {
     text-align: center;
+    width: 100%;
+    display: block;
   }
 
   #main .related strong {
@@ -5100,3 +5102,8 @@ footer .nav-footer .list-menu .link:hover {
     border-color: #2e6da4;
 }
 /* FIM FORMULARIOS ########################################################################## */
+#main .notice strong.description-notice {
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
