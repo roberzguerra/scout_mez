@@ -46,7 +46,7 @@
     <meta property="og:url" content="{% block social_url %}{{ request.build_absolute_uri }}{% endblock social_url %}">
     <meta property="og:image" content="{% block social_image %}{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ STATIC_URL }}institution/img/logo_escoteiros_rs.png{% endblock social_image %}">
     <meta property="og:type" content="{% block social_type %}website{% endblock social_type %}">
-    <meta property="og:description" content="{% block social_description %} {% endblock social_description %}">
+    <meta property="og:description" content="{% block social_description %}{{ page.description }}{% endblock social_description %}">
     <link rel="canonical" href="">
     {# {% bootstrap_css %} #}
     {% compress css %}
