@@ -373,6 +373,16 @@ RICHTEXT_ALLOWED_TAGS = ('a', 'abbr', 'acronym', 'address', 'area', 'article', '
     'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'map', 'men', 'nav', 'ol', 'optgroup', 'option', 'p', 'pre',
     'q', 's', 'samp', 'section', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'table', 'tbody', 'td',
     'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', '', 'ul', 'var', 'wbr', 'style', 'script',)
+RICHTEXT_ALLOWED_STYLES = ('margin-top', 'margin-bottom', 'margin-left', 'margin-right', 'float', 'vertical-align', 'border', 'margin','color','text-decoration',)
+
+
+
+# <style>
+# .link-seja-escoteiro {
+# color: #00accd;
+# }
+# </style>
+
 TINYMCE_SETUP_JS = 'scout_core/js/tinymce_setup.js'
 # END RICHTEXT SETTINGS ##############
 
