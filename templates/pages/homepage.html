@@ -156,41 +156,49 @@
             </div>
         </div>
 
+        {% if page.homepage.teams.count > 0 %}
         <div class="store">
             <div class="center clearfix">
-                {% if page.homepage.teams.count > 0 %}
-                    {% for category in page.homepage.teams.all %}
-                        <h2>
-                            {{ category }}
-                            <span class="titles-bgs ir">{{ category }}</span>
-                        </h2>
+                {% for category in page.homepage.teams.all %}
+                    <h2>
+                        {{ category }}
+                        <span class="titles-bgs ir">{{ category }}</span>
+                    </h2>
 
-                        <div class="list-products equipe-homepage">
-                            <span class="next-store btn ir"></span>
-                            <ul class="products clearfix">
-                                {% for person in category.get_people_by_updated_at %}
-                                    {% cycle '<li>' '' %}
-                                        <a href="javascript:void(0);" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}" class="{% cycle '' 'last' as css_class %}">
-                                            {% if person.mugshot %}
-                                                <img src="{{ MEDIA_URL }}{% thumbnail person.mugshot 140 140 %}" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}">
-                                            {% else %}
-                                                <img class="equipe-photo" src="{{ STATIC_URL }}institution/img/img-02.jpg" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}">
-                                            {% endif %}
-                                        </a>
-                                    {% cycle '' '</li>' %}
-                                {% endfor %}
-                            </ul>
-                            <span class="prev-store btn ir"></span>
-                            <div class="carrousel-products">
-                            </div>
+                    <div class="list-products equipe-homepage">
+                        <span class="next-store btn ir"></span>
+                        <ul class="products clearfix">
+                            {% for person in category.get_people_by_updated_at %}
+                                {% cycle '<li>' '' %}
+                                    <a href="javascript:void(0);" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}" class="{% cycle '' 'last' as css_class %}">
+                                        {% if person.mugshot %}
+                                            <img src="{{ MEDIA_URL }}{% thumbnail person.mugshot 140 140 %}" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}">
+                                        {% else %}
+                                            <img class="equipe-photo" src="{{ STATIC_URL }}institution/img/img-02.jpg" alt="{{ person.get_job_full_name }}" title="{{ person.get_job_full_name }}">
+                                        {% endif %}
+                                    </a>
+                                {% cycle '' '</li>' %}
+                            {% endfor %}
+                        </ul>
+                        <span class="prev-store btn ir"></span>
+                        <div class="carrousel-products">
                         </div>
+                    </div>
 
-                        <a href="{{ category.get_first_page_url }}" class="btn-store btn-style"><span>Conheça a equipe</span><i class="arrow"></i></a>
-                    {% endfor %}
-                {% endif %}
-
+                    <a href="{{ category.get_first_page_url }}" class="btn-store btn-style"><span>Conheça a equipe</span><i class="arrow"></i></a>
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if page.homepage.content %}
+        <div class="store">
+            <div class="center clearfix">
+            {% editable page.homepage.content %}
+            {{ page.homepage.content|richtext_filters|safe }}
+            {% endeditable %}
+            </div>
+        </div>
+        {% endif     %}
     {% endblock main %}
 {% endblock content_main %}

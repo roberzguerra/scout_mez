@@ -367,6 +367,12 @@ GRAPPELLI_ADMIN_TITLE = u"Escoteiros RS"
 
 # RICHTEXT SETTINGS ###
 RICHTEXT_FILTER_LEVEL = 3
+RICHTEXT_ALLOWED_TAGS = ('a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'b', 'bdo', 'big', 'blockquote',
+    'br', 'button', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'dd', 'del', 'dfn', 'dir', 'div', 'dl',
+    'dt', 'em', 'fieldset', 'figure', 'font', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hr', 'i',
+    'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'map', 'men', 'nav', 'ol', 'optgroup', 'option', 'p', 'pre',
+    'q', 's', 'samp', 'section', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'table', 'tbody', 'td',
+    'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', '', 'ul', 'var', 'wbr', 'style', 'script',)
 TINYMCE_SETUP_JS = 'scout_core/js/tinymce_setup.js'
 # END RICHTEXT SETTINGS ##############
 
