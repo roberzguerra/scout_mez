@@ -58,7 +58,13 @@
 
     {% block title %}
         {% if page %}
-            {% editable page.title %}<h2>{{ page.title }}<span class="titles-bgs"></span></h2>{% endeditable %}
+            {% editable page.title %}<h2>
+                {{ page.title }}
+                {% if category %}
+                    - {{ category }}
+                {% endif %}
+                <span class="titles-bgs"></span>
+            </h2>{% endeditable %}
         {% else %}
             {% editable page.title %}<h2>
                 {% trans "Notícias" %}
