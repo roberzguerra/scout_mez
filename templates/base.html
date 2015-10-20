@@ -52,8 +52,6 @@
     {% compress css %}
     {% block head_begin %}
     {% endblock head_begin %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tahoma">
     <link rel="stylesheet" href="{{ STATIC_URL }}institution/css/index.css">
     {% ifinstalled cartridge.shop %}
     <link rel="stylesheet" href="{% static "css/cartridge.css" %}">
@@ -63,6 +61,9 @@
     {% endifinstalled %}
     {% block extra_css %}{% endblock %}
     {% endcompress %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tahoma">
+
     {% block extra_head_css %}
 
     {% endblock extra_head_css %}
