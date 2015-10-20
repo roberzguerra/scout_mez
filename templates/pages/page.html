@@ -16,7 +16,7 @@
 {% endmetablock %}{% endblock %}
 
 {# Facebook #}
-{% block social_title %}{{ page.title }}{% endblock %}
+{% block social_title %}{% if page.meta_title %}{{ page.meta_title }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 {% block social_image %}{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ MEDIA_URL }}{{ page.image }}{% endblock social_image %}">
 {% block social_description %}{{ page.description }}{% endblock social_description %}
 
