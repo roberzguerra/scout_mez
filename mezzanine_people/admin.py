@@ -8,7 +8,7 @@ from mezzanine.conf import settings
 from mezzanine.core.admin import DisplayableAdmin, TabularDynamicInlineAdmin
 
 person_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
-#person_fieldsets[0][1]["fields"].insert(1, "categories")
+person_fieldsets[0][1]["fields"].insert(1, "categories")
 person_list_display = ["title", "status", "admin_link"]
 person_fieldsets[0][1]["fields"].extend(["first_name", "last_name", "job_title",
                                          "mugshot", "mugshot_credit", "bio", "email",
