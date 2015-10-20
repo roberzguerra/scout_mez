@@ -95,8 +95,11 @@ jQuery(function($) {
             autoresize_on_init: true,
             autoresize_bottom_margin: 20,
             fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 23pt 34pt 36pt 38pt 40pt",
+
+            // permite a tag style dentro do body do tiny_mce
             valid_elements : '*[*]',
             valid_children : "+body[style],p[strong|a|#text]",
+
             resize: "both"
         });
 
@@ -135,8 +138,11 @@ jQuery(function($) {
             toolbar2: "bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table blockquote removeformat",
             forced_root_block : '',
             fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 23pt 34pt 36pt 38pt 40pt",
+
+            // permite a tag style dentro do body do tiny_mce
             valid_elements : '*[*]',
             valid_children : "+body[style],p[strong|a|#text]",
+
             resize: "both"
         });
     }
