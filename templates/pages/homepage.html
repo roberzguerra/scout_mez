@@ -199,6 +199,34 @@
             {% endeditable %}
             </div>
         </div>
-        {% endif     %}
+            {% comment %}
+            // PARA USAR VIDEOS RESPONSIVOS:
+
+            <figure>
+            <div class="boxVideo">
+                // IFRAME OU INCORPORAÇÃO DO VIDEO
+            </div>
+            </figure>
+
+            CSSS: QUE JÁ ESTA NO INDEX.CSS
+            figure { width: 90%; min-width: 17.5em; margin:0 auto;}
+            figcaption { font: 120% sans-serif; text-align: center;}
+            .boxVideo {
+                position: relative;
+                padding-bottom: 56.25%;
+                padding-top: 25px;
+                height: 0;
+                margin:0 auto;
+            }
+            .boxVideo iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            {% endcomment %}
+
+        {% endif %}
     {% endblock main %}
 {% endblock content_main %}
